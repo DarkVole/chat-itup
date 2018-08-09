@@ -1,7 +1,7 @@
  import React, { Component } from 'react';
 
 
-//this.roomsRef = this.props.firebase.database().ref('rooms');
+
 
  class RoomList extends Component {
 
@@ -13,6 +13,7 @@
     };
 }
    
+//this.roomsRef = this.props.firebase.database().ref('rooms');
 
    render() {
      return (
