@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 
 import './App.css';
 import RoomList from './components/RoomList.js';
+//import RoomForm from './components/RoomForm.js';
 import * as firebase from 'firebase';
 
 
@@ -24,6 +25,7 @@ class App extends Component {
     return (
       <div className="App">
       <RoomList firebase={firebase}/>
+
       </div>
     );
   }
