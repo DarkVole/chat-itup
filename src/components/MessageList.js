@@ -43,7 +43,7 @@
        <section className="messagelist">	
           <ul>
             this.state.messages.map( (val, index) =>
-              return  key={index} <li> value = {val.contens} </li>
+              return  key={index} <li> value = {val.contents} </li>
            </ul>
         </section>
                );
