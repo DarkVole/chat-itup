@@ -29,9 +29,9 @@
  //   event.preventDefault();
  // }
 
-handleRoomClick(song) {
-  const isSameSong = this.state.currentSong === song;
-}
+
+
+
 
    componentDidMount() {
     this.messagesRef.on('child_added', snapshot => {

@@ -9,25 +9,24 @@
       value: '',
       rooms: []
     };
+this.roomsRef = this.props.firebase.database().ref('rooms')
+
+
+    this.handleChange = this.handleChange.bind(this);
+    this.createRoom = this.createRoom.bind(this);
   }
 
- // Fuctions                      
+  handleChange(event) {
+    this.setState({value: event.target.value});
 
- // handleChange(event) {
- //   this.setState({value: event.target.value});
- // }
+  }
 
   createRoom(event) {
     this.roomsRef.push({rooms: this.state.value});
-    //alert('A room has been created: ' + this.state.value);
+   alert('A room has been created: ' + this.state.value);
     event.preventDefault();
                         }
 
-handleRoomClick(RoomName) {
- const isNewRoom = this.state.rooms.roomName;
-// console.log(isNewRoom);
-return (isNewRoom);
-}
 
 
    componentDidMount() {
@@ -36,23 +35,22 @@ return (isNewRoom);
        room.key = snapshot.key;
        this.setState({ rooms: this.state.rooms.concat( room ) })  
        this.setState({value: ''});           
-                  });
-}
-  
+     });
+   }
     render() {
-     return(
-      <section>
-      <ul>
-		      <form onSubmit={this.createMessage} ><label>Name:
-      	   <input type="text" value={this.state.value} onChange={this.handleChange} />
-          </label>
-            <input type="submit" value="Submit" />
-          </form>
-
-     
-     </ul>
-        </section>
-      );
+       return (
+       <section className="roomlist"> 
+       <form onSubmit={this.createRoom} ><label>Name:
+       <input type="text" value={this.state.value} onChange={this.handleChange} />
+       </label>
+       <input type="submit" value="Submit" />
+       </form>
+              <ul>
+       {this.state.rooms.map(function(val,index){
+          return <li key={index}>{val.rooms}</li> })}
+       </ul>
+       </section>
+       );
    }
  }
  
