@@ -29,26 +29,31 @@
  //   event.preventDefault();
  // }
 
+handleRoomClick(song) {
+  const isSameSong = this.state.currentSong === song;
+}
+
    componentDidMount() {
     this.messagesRef.on('child_added', snapshot => {
     console.log(snapshot);
     const message = snapshot.val();
     message.key = snapshot.key;
-    this.setState({ messages: this.state.messages.concat( message ) })  
-      //this.setState({value: ''});           
+    this.setState({ messages: this.state.messages.concat( message ) })
+   //this.setState({value: ''});           
     });
   }
-   render() {
-       return (
-       <section className="messagelist">	
-          <ul>
-            this.state.messages.map( (val, index) =>
-              return  key={index} <li> value = {val.contents} </li>
-           </ul>
-        </section>
-               );
-              }
+   
 
- }
- 
+    render() {
+     return(
+       <ul>
+         {this.state.messages.map(function(val, index){
+          return <li key={index}>{val.content} </li> })}
+        </ul>
+      );
+    }
+   }
+       
+      
+       
  export default MessageList;
