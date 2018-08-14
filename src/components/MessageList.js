@@ -7,17 +7,11 @@
  	super(props);
 
     this.state = {
-      content: [],
-      roomdId: [],
-      sendAt: [],
-      username: [],
+      messages: [],
       value: ''
     };
 console.log (this.state.roomdId);
-this.messageRef = this.props.firebase.database().ref('messages');
-//this.roomIdRef = this.props.firebase.database().ref('roomdId');
-//this.sentAtRef = this.props.firebase.database().ref('sendAt');
-//this.usernameRef = this.props.firebase.database().ref('username')
+this.messagesRef = this.props.firebase.database().ref('messages');
 
  //   this.handleChange = this.handleChange.bind(this);
  //   this.createRoom = this.createRoom.bind(this);

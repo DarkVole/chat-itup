@@ -26,6 +26,7 @@ class App extends Component {
       <div className="App">
       <RoomList firebase={firebase}/>
       <MessageList firebase={firebase}/>
+      <isNewRoom/>
       </div>
     );
   }

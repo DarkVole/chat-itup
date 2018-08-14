@@ -8,7 +8,9 @@
     this.state = {value: ''};
     this.state = {
       rooms: []
+
     };
+
 
 this.roomsRef = this.props.firebase.database().ref('rooms')
 
@@ -39,6 +41,13 @@ this.roomsRef = this.props.firebase.database().ref('rooms')
      });
    }
 
+// Modify below to handle new Room selection
+handleRoomClick(roomName) {
+ const isNewRoom = this.state.rooms.roomName;
+ console.log(isNewRoom)
+ }
+
+
    render() {
 
        return (
@@ -49,10 +58,19 @@ this.roomsRef = this.props.firebase.database().ref('rooms')
        <input type="submit" value="Submit" />
        </form>
               <ul>
-       {this.state.rooms.map(function(val,index){
-       		return <li key={index}>{val.rooms}</li> })}
+               this.state.rooms.map( (val, index) =>
+               return <li class= "" className="room" key={index} {val.rooms}  onClick={() => this.handleRoomClick(val.rooms)} >
+
        </ul>
+
+       <ul>
+       <li> <isNewRoom/> </li>
+       </ul>
+
+
+
        </section>
+
        );
 
    }
