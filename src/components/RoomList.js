@@ -52,22 +52,17 @@ handleRoomClick(roomName) {
 
        return (
        <section className="roomlist">	
-       <form onSubmit={this.createRoom} ><label>Name:
-       <input type="text" value={this.state.value} onChange={this.handleChange} />
-       </label>
-       <input type="submit" value="Submit" />
-       </form>
-              <ul>
-               this.state.rooms.map( (val, index) =>
-               return <li class= "" className="room" key={index} {val.rooms}  onClick={() => this.handleRoomClick(val.rooms)} >
-
-       </ul>
-
-       <ul>
-       <li> <isNewRoom/> </li>
-       </ul>
-
-
+       		<form onSubmit={this.createRoom} ><label>Name:
+       		<input type="text" value={this.state.value} onChange={this.handleChange} />
+       		</label>
+       			<input type="submit" value="Submit" />
+       			</form>
+             		<ul>
+               			this.state.rooms.map( (val, index) =>
+              				return  key={index} <li> value = {val.rooms} </li>
+       				
+       	   		
+    				 </ul>
 
        </section>
 

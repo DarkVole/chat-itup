@@ -1,6 +1,5 @@
  import React, { Component } from 'react';
 
-
  class MessageList extends Component {
 
  	constructor(props) {
@@ -10,8 +9,8 @@
       messages: [],
       value: ''
     };
-console.log (this.state.roomdId);
-this.messagesRef = this.props.firebase.database().ref('messages');
+//console.log (this.state.roomdId);
+    this.messagesRef = this.props.firebase.database().ref('messages');
 
  //   this.handleChange = this.handleChange.bind(this);
  //   this.createRoom = this.createRoom.bind(this);
@@ -32,27 +31,23 @@ this.messagesRef = this.props.firebase.database().ref('messages');
 
    componentDidMount() {
     this.messagesRef.on('child_added', snapshot => {
-           console.log(snapshot);
-           const message = snapshot.val();
-      message.key = snapshot.key;
-      this.setState({ messages: this.state.messages.concat( message ) })  
+    console.log(snapshot);
+    const message = snapshot.val();
+    message.key = snapshot.key;
+    this.setState({ messages: this.state.messages.concat( message ) })  
       //this.setState({value: ''});           
     });
   }
-
    render() {
-
        return (
        <section className="messagelist">	
-
-              <ul>
-       {this.state.messages.map(function(val, index){
-       		return <li key={index}>{val.content}</li> })}
-       </ul>
-       </section>
-       );
-
-   }
+          <ul>
+            this.state.messages.map( (val, index) =>
+              return  key={index} <li> value = {val.contens} </li>
+           </ul>
+        </section>
+               );
+              }
 
  }
  
