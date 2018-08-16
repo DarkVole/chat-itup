@@ -37,7 +37,7 @@
     this.messagesRef.on('child_added', snapshot => {
     console.log(snapshot);
     const message = snapshot.val();
-    message.key = snapshot.key;
+     message.key = snapshot.key;
     this.setState({ messages: this.state.messages.concat( message ) })
    //this.setState({value: ''});           
     });

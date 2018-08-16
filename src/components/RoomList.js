@@ -7,13 +7,20 @@
  	super(props);
     this.state = {
       value: '',
-      rooms: []
+      rooms: [],
+
     };
+
+      this.state = {
+            activeRoom: ''
+        };
+
 this.roomsRef = this.props.firebase.database().ref('rooms')
 
 
     this.handleChange = this.handleChange.bind(this);
     this.createRoom = this.createRoom.bind(this);
+    this.activeRoom = this.activeRoom.bind(this);
   }
 
   handleChange(event) {
@@ -45,10 +52,12 @@ this.roomsRef = this.props.firebase.database().ref('rooms')
        </label>
        <input type="submit" value="Submit" />
        </form>
-              <ul>
-       {this.state.rooms.map(function(val,index){
-          return <li key={index}>{val.rooms}</li> })}
-       </ul>
+<ul> 
+  {
+         this.state.rooms.map ( (room, index) =>
+          <li key={index} onClick={() => this.props.setActiveRoom(room)}  >{room.name}</li>
+          </ul>
+        )}
        </section>
        );
    }
