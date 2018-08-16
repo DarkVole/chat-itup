@@ -54,7 +54,7 @@ this.roomsRef = this.props.firebase.database().ref('rooms')
 <ul> 
   {
          this.state.rooms.map ( (room, index) =>
-          <li key={index} onClick={() => this.props.setActiveRoom(room.rooms)}  >{room.rooms}</li>
+          <li key={index} onClick={() => this.props.setActiveRoom(room.name)}  >{room.name}</li>
 
         )}
 

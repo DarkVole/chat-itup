@@ -5,10 +5,7 @@
  	constructor(props) {
  	super(props);
 
-    this.state = {
-      messages: [],
-      value: ''
-    };
+        this.state = { content: [], roomdId: [], sendAt: [], username: [] };
 //console.log (this.state.roomdId);
     this.messagesRef = this.props.firebase.database().ref('messages');
 
@@ -20,17 +17,6 @@
     this.setState({value: event.target.value});
 
   }
-
-//  createMessage(event) {
-//    this.messagesRef.push({
-//  		messages: this.state.value
-//	});
-//    alert('A message has been created: ' + this.state.value);
- //   event.preventDefault();
- // }
-
-
-
 
 
    componentDidMount() {

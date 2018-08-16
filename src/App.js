@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 
 import './App.css';
 import RoomList from './components/RoomList.js';
-import MessageList from './components/MessageList.js';
+//import MessageList from './components/MessageList.js';
 import * as firebase from 'firebase';
 
   var config = {
@@ -39,18 +39,18 @@ class App extends Component {
         <h3>Chat Rooms:</h3>
           <RoomList
            firebase= { firebase }
-           setActiveRoom={ this.setActiveRoom }
+           setActiveRoom={ this.state.setActiveRoom }
            activeRoom={this.state.activeRoom}
       />
  <h2>Room Selected</h2>
-       <p>"Active Room"</p>
-<h2>Messages</h2>
-          <MessageList
-           firebase = { firebase }
-           messages={ this.state.content } />
+       <p>"Active Room - This is just text until the error is removed"</p>
+
       </div>
     );
   }
 }
-
+//<h2>Messages</h2>
+//<MessageList
+//firebase = { firebase }
+//messages={ this.state.content } />
 export default App;
