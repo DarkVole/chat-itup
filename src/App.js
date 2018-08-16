@@ -14,31 +14,23 @@ import * as firebase from 'firebase';
     messagingSenderId: "1073569690929"
   };
 
-
   firebase.initializeApp(config);
-
-
 
 class App extends Component {
     constructor(props) {
     super(props);
       this.state = {
-            activeRoom: ''
+            activeRoom: '',
+          setActiveRoom: ''
         };
-    this.setActiveRoom = this.setActiveRoom.bind(this);
+
   }
 
-  
+ setActiveRoom(name) {
+    const roomActive = this.setState({activeRoom:name});
+    console.log({activeRoom:name});
 
-  
-  setActiveRoom(name) {
-    this.setState({activeRoom:name});
   }
-            
-
-
-
-
 
   render() {
     return (
@@ -47,10 +39,14 @@ class App extends Component {
         <h3>Chat Rooms:</h3>
           <RoomList
            firebase= { firebase }
-           setActiveRoom={ this.setActiveRoom } />
+           setActiveRoom={ this.setActiveRoom }
+           activeRoom={this.state.activeRoom}
+      />
+ <h2>Room Selected</h2>
+       <p>"Active Room"</p>
+<h2>Messages</h2>
           <MessageList
            firebase = { firebase }
-           activeRoom={this.state.activeRoom}
            messages={ this.state.content } />
       </div>
     );

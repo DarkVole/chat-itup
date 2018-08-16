@@ -8,19 +8,18 @@
     this.state = {
       value: '',
       rooms: [],
-
+        activeRoom: '',
+        setActiveRoom: '',
     };
 
-      this.state = {
-            activeRoom: ''
-        };
+
 
 this.roomsRef = this.props.firebase.database().ref('rooms')
 
 
     this.handleChange = this.handleChange.bind(this);
     this.createRoom = this.createRoom.bind(this);
-    this.activeRoom = this.activeRoom.bind(this);
+
   }
 
   handleChange(event) {
@@ -55,9 +54,12 @@ this.roomsRef = this.props.firebase.database().ref('rooms')
 <ul> 
   {
          this.state.rooms.map ( (room, index) =>
-          <li key={index} onClick={() => this.props.setActiveRoom(room)}  >{room.name}</li>
-          </ul>
+          <li key={index} onClick={() => this.props.setActiveRoom(room.rooms)}  >{room.rooms}</li>
+
         )}
+
+                  </ul>
+
        </section>
        );
    }
