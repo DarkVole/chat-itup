@@ -10,7 +10,9 @@
       rooms: [],
         activeRoom: '',
         setActiveRoom: '',
+        roomKey:''
     };
+
 
 
 
@@ -19,8 +21,10 @@ this.roomsRef = this.props.firebase.database().ref('rooms')
 
     this.handleChange = this.handleChange.bind(this);
     this.createRoom = this.createRoom.bind(this);
+        this.setActiveRoom = this.setActiveRoom.bind(this);
 
-  }
+
+    }
 
   handleChange(event) {
     this.setState({value: event.target.value});
@@ -28,11 +32,17 @@ this.roomsRef = this.props.firebase.database().ref('rooms')
   }
 
   createRoom(event) {
-    this.roomsRef.push({rooms: this.state.value});
+    this.roomsRef.push({name: this.state.value});
    alert('A room has been created: ' + this.state.value);
     event.preventDefault();
                         }
+     setActiveRoom(x) {
+         //const roomActive = this.setState({activeRoom:name});
+         console.log("Selected " + x.name);
+         console.log("Key " + x.key);
+         this.setState({activeRoom:x.name});
 
+     }
 
 
    componentDidMount() {
@@ -54,12 +64,14 @@ this.roomsRef = this.props.firebase.database().ref('rooms')
 <ul> 
   {
          this.state.rooms.map ( (room, index) =>
-          <li key={index} onClick={() => this.props.setActiveRoom(room.name)}  >{room.name}</li>
+          <li key={index} onClick={() => this.setActiveRoom(room)}  >{room.name}</li>
+
 
         )}
 
                   </ul>
-
+        <h2>Room Selected</h2>
+<p>{ this.state.activeRoom }</p>
        </section>
        );
    }

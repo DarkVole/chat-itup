@@ -21,16 +21,19 @@ class App extends Component {
     super(props);
       this.state = {
             activeRoom: '',
-          setActiveRoom: ''
+          setActiveRoom: '',
+          roomKey:''
         };
 
   }
 
- setActiveRoom(name) {
-    const roomActive = this.setState({activeRoom:name});
-    console.log({activeRoom:name});
+    onUpdate = (val) => {
+        this.setState({
+            activeRoom: val
 
-  }
+        })
+        console.log("App " + val);
+    };
 
   render() {
     return (
@@ -39,16 +42,16 @@ class App extends Component {
         <h3>Chat Rooms:</h3>
           <RoomList
            firebase= { firebase }
-           setActiveRoom={ this.state.setActiveRoom }
-           activeRoom={this.state.activeRoom}
+           setActiveRoom={ this.state.activeRoom }
+           onUpdate={this.onUpdate}
       />
- <h2>Room Selected</h2>
-       <p>"Active Room - This is just text until the error is removed"</p>
+
 
       </div>
     );
   }
 }
+console.log(this.onUpdate)
 //<h2>Messages</h2>
 //<MessageList
 //firebase = { firebase }
