@@ -17,6 +17,9 @@
 
 
 this.roomsRef = this.props.firebase.database().ref('rooms')
+        this.UserRef = this.props.firebase.database().ref('UserID')
+        this.MessageRef = this.props.firebase.database().ref('messages')
+
 
 
     this.handleChange = this.handleChange.bind(this);
@@ -41,6 +44,8 @@ this.roomsRef = this.props.firebase.database().ref('rooms')
          console.log("Selected " + x.name);
          console.log("Key " + x.key);
          this.setState({activeRoom:x.name});
+         this.setState({roomKey:x.key});
+         console.log( this.state.activeRoom )
 
      }
 
@@ -49,7 +54,7 @@ this.roomsRef = this.props.firebase.database().ref('rooms')
     this.roomsRef.on('child_added', snapshot => {
        const room = snapshot.val();
        room.key = snapshot.key;
-       this.setState({ rooms: this.state.rooms.concat( room ) })  
+       this.setState({ rooms: this.state.rooms.concat( room ) })
        this.setState({value: ''});           
      });
    }

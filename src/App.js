@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 
 import './App.css';
 import RoomList from './components/RoomList.js';
-//import MessageList from './components/MessageList.js';
+import MessageList from './components/MessageList.js';
 import * as firebase from 'firebase';
 
   var config = {
@@ -22,18 +22,17 @@ class App extends Component {
       this.state = {
             activeRoom: '',
           setActiveRoom: '',
+          activeMessages: '',
           roomKey:''
         };
 
   }
 
-    onUpdate = (val) => {
-        this.setState({
-            activeRoom: val
-
-        })
-        console.log("App " + val);
-    };
+    handleChildClick(activeRoom,event) {
+        alert("The Child button data is: " + activeRoom.childText + " - " + activeRoom.childNumber);
+        alert("The Child HTML is: " + event.target.outerHTML);
+        //remove after working
+    }
 
   render() {
     return (
@@ -42,16 +41,16 @@ class App extends Component {
         <h3>Chat Rooms:</h3>
           <RoomList
            firebase= { firebase }
-           setActiveRoom={ this.state.activeRoom }
-           onUpdate={this.onUpdate}
-      />
-
+           activeRoom={ this.props.activeRoom }/>
+            <MessageList
+            firebase= { firebase }
+            activeMessages={this.props.activeMessages}/>
 
       </div>
     );
   }
 }
-console.log(this.onUpdate)
+
 //<h2>Messages</h2>
 //<MessageList
 //firebase = { firebase }
