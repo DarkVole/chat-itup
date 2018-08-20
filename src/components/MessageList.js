@@ -1,79 +1,68 @@
- import React, { Component } from 'react';
 
- class MessageList extends Component {
 
-     constructor(props) {
+    import React, { Component } from 'react';
+ import * as firebase from 'firebase';
+
+    class MessageList extends Component {
+
+     constructor(props){
          super(props);
          this.state = {
              value: '',
+             rooms: [],
              activeRoom: '',
-             content: [],
-             roomdId: [],
-             sendAt: [],
-             messages: [],
-             activeMessages: '',
-             username: []
+             //setActiveRoom: '',
+             roomKey:''
+
          };
 
 
-         this.roomsRef = this.props.firebase.database().ref('rooms')
-         this.UserRef = this.props.firebase.database().ref('UserID')
-         this.MessageRef = this.props.firebase.database().ref('messages')
-     }
+         componentDidMount() {
+                 const mess = snapshot.val();
+                 mess.key = snapshot.key;
+                 // this.setState({ rooms: this.state.rooms.concat( room ) })
+                 this.setState({value: ''})};
 
-     render() {
 
+
+     // setActiveMessage(x) {
+ 
+      //     console.log("Content " + x.content);
+      //     console.log("UserId " + x.username);
+      //     this.setState({activeMessages:x.content});
+      // }
+//<div> seems important here for some reason ???
+    render() {
          return (
-             < section className = "messagelist" >
-             < h2 > Messages < /h2>
-             < ul >
-             this.state.messages.map((mess, index) =>
-             < li key = {index} > {mess.contents}<li>
+             <div>
 
-             < /ul>
-         < /section>
+             <h2>Hello World</h2>
+            <ul>
+        <this.state.messagess.map ( (mess, index) =>
+        <li key={index}> {mess.content}></li>
+        </ul>
 
-     );
-     }
-
- }
+    </div>)
+    );
 
 
-       
+    }
+
  export default MessageList;
 
- //Trashcan
- // Remove after Checkpoint submission
- //
- //          <h2>Message</h2>
- //          {
- //              this.state.messages.map ( (mess, index) =>
- //          <li key={index}  >{this.props.mess.content}</li>
- //
- //
- //     )}
- //
- //     </ul>
+//         this.state = {
+//          rooms: [],ref
+//          activeRoom: '',
+//          roomKey:'',
+//          messages: [],
+//              content: '',
+//              roomId: '',
+//              sendAt: '',
+//              username: ''
 
- //   componentDidMount() {
- //     this.messagesRef.on('child_added', snapshot => {
- //     console.log(snapshot);
- //     const message = snapshot.val();
- //      message.key = snapshot.key;
- //     this.setState({ messages: this.state.messages.concat( message ) })
- //    //this.setState({value: ''});
- //     });
- //   }
-
- //     setActiveMessage(x) {
- //
- //          console.log("Content " + x.content);
- //          console.log("UserId " + x.username);
- //          //this.setState({activeRoom:x.name});
- //          //return this.props.activeRoom = this.setState({activeRoom:x.key});
- //          //console.log( this.state.activeRoom )
- //      }
- //  handleChange(event) {
- //     this.setState({value: event.target.value});
- //
- //   }
+//             <ul>
+//              {
+//              this.state.messages.map( (mess, index) =>
+//                  <li key={index}>{mess.contents}</li>
+//              )}
+//              </ul
