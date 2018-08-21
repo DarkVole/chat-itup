@@ -11,16 +11,25 @@ import React, { Component } from 'react';
          this.state = {
              value: '',
              rooms: [],
+             val:[],
+             messages: [],
+             content: '',
+             roomId: '',
+             sendAt: '',
              activeRoom: '',
-             setActiveRoom: '',
+             activeMessages:{},
+             setActiveMessage: '',
              roomKey: ''
          };
 
 
          this.roomsRef = this.props.firebase.database().ref('rooms');
+         this.messagesRef = this.props.firebase.database().ref('messages');
          this.handleChange = this.handleChange.bind(this);
          this.createRoom = this.createRoom.bind(this);
          this.setActiveRoom = this.setActiveRoom.bind(this);
+         this.setActiveMessages = this.setActiveMessages.bind(this);
+     //    this.setActiveMessage = this.setActiveMessage.bind(this);
      }  // to Constructor
 
      // Function Section********************************
@@ -51,22 +60,36 @@ import React, { Component } from 'react';
          //const roomActive = this.setState({activeRoom:name});
          console.log("Selected " + x.name);  // for debug
          console.log("Key " + x.key);  // for debug
-         this.setState({activeRoom:x.name});
+         this.setState.activeRoom = x.name;;
          this.setState({roomKey:x.key});
+
+         this.setState({activeMessages: this.state.message(x)});
          console.log( this.state.activeRoom ) // valid prop is working
      }
 
      componentDidMount() {
     this.roomsRef.on('child_added', snapshot => {
        const room = snapshot.val();
-       room.key = snapshot.key;
+       const message = snapshot.val()
+       message.key = snapshot.key;
       this.setState({ rooms: this.state.rooms.concat( room ) })
-       this.setState({value: ''});
+      //  this.setState({ messages: this.state.messages.push( message ) })
+
      });}
 
+     setActiveMessages(x) {
+         console.log("Selected " + x.name);  // for debug
+         console.log("Key " + x.key);  // for debug
+         this.setState({activeRoom:x.name});
+         this.setState({roomKey:x.key});
+         this.setState({setActiveMessage:x.name});
 
-   //Comments are not allow in render.
-     // The first part is the form that, when the Submit value is click on,
+         this.setState({activeMessages: this.state.message(x)});
+         console.log( this.state.activeRoom ) // valid prop is working
+     }
+
+   //Comments are not allowed in render.
+     // The first part is the form that, when the Submit value is clicked on,
      // takes value and executes the handleChange function using the variable value.
      // The .map loop runs through the rooms array from fiebase, and lists them in
      // room.name.
@@ -78,16 +101,19 @@ import React, { Component } from 'react';
     render() {
        return (
            <section className="roomlist">
-            <form onSubmit={this.createRoom} ><label>Name:
-    <input type="text" value={this.state.value} onChange={this.handleChange} />
-        </label>
-        <input type="submit" value="Submit" />
-            </form>
-            <ul>
-            {this.state.rooms.map(function(val,index){
-                return <li key={index}>{val.name}</li> })}
-                </ul>
-                </section>
+               <form onSubmit={this.createRoom} ><label>Name:
+                   <input type="text" value={this.state.value} onChange={this.handleChange} />
+               </label>
+                   <input type="submit" value="Submit" />
+               </form>
+               <ul>
+                   {this.state.rooms.map(function(val,index){
+                       return (<li key={index}>{val.name}  onClick=(this.setActiveRoom} ></li>)
+                   })}
+               </ul>
+
+           </section>
+
        );
    }
 

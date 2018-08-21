@@ -23,10 +23,11 @@ import React, { Component } from 'react';
             super(props);
             this.state = {
                 value: '',
-                val:'',
+                val:[],
                 rooms: [],
+                messages: [],
+                content: '',
                 activeRoom: '',
-                //setActiveRoom: '',
                 roomKey: ''
 
             };
@@ -34,18 +35,16 @@ import React, { Component } from 'react';
         }
 
 
-
         render() {
             return (
                 < section
                     className="messagelist">
 
-                    <ul>
-                        {this.state.messages.map(function (val, index) {
-                            return
-                            <li key={index}> {val.content}</li>
-                        })}
-                    </ul>
+
+                        <h2>All Messages for Testing</h2><ul>
+                    {this.state.messages.map(function(val, index) {
+                        return <li key={index}>{val.content}</li>})}
+                </ul>
                 </section>
             );
         }
