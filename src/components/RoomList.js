@@ -3,35 +3,27 @@
 // Allows you to Create a room
 
 import React, { Component } from 'react';
-
+//import * as firebase from 'firebase';
  class RoomList extends Component {
 
- 	constructor(props) {
- 	super(props);
-    this.state = {
-      value: '',
-      rooms: [],
-        activeRoom: '',
-        setActiveRoom: '',
-        roomKey:''
-    };
+     constructor(props) {
+         super(props);
+         this.state = {
+             value: '',
+             rooms: [],
+             activeRoom: '',
+             setActiveRoom: '',
+             roomKey: ''
+         };
 
 
+         this.roomsRef = this.props.firebase.database().ref('rooms');
+         this.handleChange = this.handleChange.bind(this);
+         this.createRoom = this.createRoom.bind(this);
+         this.setActiveRoom = this.setActiveRoom.bind(this);
+     }  // to Constructor
 
-// Bind Firebase dbs
-this.roomsRef = this.props.firebase.database().ref('rooms')
-//this.UserRef = this.props.firebase.database().ref('UserID')
-this.MessageRef = this.props.firebase.database().ref('messages')
-
-
-    this.handleChange = this.handleChange.bind(this);
-    this.createRoom = this.createRoom.bind(this);
-    this.setActiveRoom = this.setActiveRoom.bind(this);
-
-    } // to Constructor
-
-     // Function Section
-
+     // Function Section********************************
      // The function is called when when there is a form submit. It sets
      // the the varible value to the that was entered into the submit
      // form
@@ -64,19 +56,14 @@ this.MessageRef = this.props.firebase.database().ref('messages')
          console.log( this.state.activeRoom ) // valid prop is working
      }
 
-    // componentDidMount is a function that executes when this component first loads,
-     // so that is the event that triggers its execution. When a child is added,
-     // takes a "snapshot" and assigns it the variable room with the variable val(?),
-     // and then creates the key. A record is added to the firebase db (concat), and
-     // the key is (set automatically) or (determined by the snapshot)????
-   componentDidMount() {
+     componentDidMount() {
     this.roomsRef.on('child_added', snapshot => {
-       const mess = snapshot.val();
-       mess.key = snapshot.key;
-      // this.setState({ rooms: this.state.rooms.concat( room ) })
-       this.setState({value: ''});           
-     });
-   }
+       const room = snapshot.val();
+       room.key = snapshot.key;
+      this.setState({ rooms: this.state.rooms.concat( room ) })
+       this.setState({value: ''});
+     });}
+
 
    //Comments are not allow in render.
      // The first part is the form that, when the Submit value is click on,
@@ -90,23 +77,22 @@ this.MessageRef = this.props.firebase.database().ref('messages')
 
     render() {
        return (
-       <section className="roomlist"> 
-       <form onSubmit={this.createRoom} ><label>Name:
-       <input type="text" value={this.state.value} onChange={this.handleChange} />
-       </label>
-       <input type="submit" value="Submit" />
-       </form>
-    <ul>
-
-        <h2>Room Selected</h2>
-<p>{ this.state.activeRoom }</p>
-       </section>
+           <section className="roomlist">
+            <form onSubmit={this.createRoom} ><label>Name:
+    <input type="text" value={this.state.value} onChange={this.handleChange} />
+        </label>
+        <input type="submit" value="Submit" />
+            </form>
+            <ul>
+            {this.state.rooms.map(function(val,index){
+                return <li key={index}>{val.name}</li> })}
+                </ul>
+                </section>
        );
    }
- }
- 
-  
- export default RoomList;  // export to other components
+
+}
+ export default RoomList;
 
 
 

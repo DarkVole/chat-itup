@@ -1,68 +1,54 @@
+//        componentDidMount() {
+//             const mess = snapshot.val();
+//             mess.key = snapshot.key;
+//
+//             this.setState(value: '')};
+
+//            <ul>
+//             {this.state.messagess.map((mess, index) =>
+//             <li
+//
+//
+//             {this.state.rooms.map(function(val,index){
+//                 return <li key={index}>{val.rooms}</li> })}
+//             key = {index}> {mess.content}></li>
+//         )}</ul>                 </ div >
 
 
-    import React, { Component } from 'react';
- import * as firebase from 'firebase';
+import React, { Component } from 'react';
 
     class MessageList extends Component {
 
-     constructor(props){
-         super(props);
-         this.state = {
-             value: '',
-             rooms: [],
-             activeRoom: '',
-             //setActiveRoom: '',
-             roomKey:''
+        constructor(props) {
+            super(props);
+            this.state = {
+                value: '',
+                val:'',
+                rooms: [],
+                activeRoom: '',
+                //setActiveRoom: '',
+                roomKey: ''
 
-         };
-
-
-         componentDidMount() {
-                 const mess = snapshot.val();
-                 mess.key = snapshot.key;
-                 // this.setState({ rooms: this.state.rooms.concat( room ) })
-                 this.setState({value: ''})};
+            };
+            this.messagesRef = this.props.firebase.database().ref('messages');
+        }
 
 
 
-     // setActiveMessage(x) {
- 
-      //     console.log("Content " + x.content);
-      //     console.log("UserId " + x.username);
-      //     this.setState({activeMessages:x.content});
-      // }
-//<div> seems important here for some reason ???
-    render() {
-         return (
-             <div>
+        render() {
+            return (
+                < section
+                    className="messagelist">
 
-             <h2>Hello World</h2>
-            <ul>
-        <this.state.messagess.map ( (mess, index) =>
-        <li key={index}> {mess.content}></li>
-        </ul>
-
-    </div>)
-    );
-
-
+                    <ul>
+                        {this.state.messages.map(function (val, index) {
+                            return
+                            <li key={index}> {val.roomid}</li>
+                        })}
+                    </ul>
+                </section>
+            );
+        }
     }
 
  export default MessageList;
-
-//         this.state = {
-//          rooms: [],ref
-//          activeRoom: '',
-//          roomKey:'',
-//          messages: [],
-//              content: '',
-//              roomId: '',
-//              sendAt: '',
-//              username: ''
-
-//             <ul>
-//              {
-//              this.state.messages.map( (mess, index) =>
-//                  <li key={index}>{mess.contents}</li>
-//              )}
-//              </ul
