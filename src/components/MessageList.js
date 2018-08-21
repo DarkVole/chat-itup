@@ -43,7 +43,7 @@ import React, { Component } from 'react';
                     <ul>
                         {this.state.messages.map(function (val, index) {
                             return
-                            <li key={index}> {val.roomid}</li>
+                            <li key={index}> {val.content}</li>
                         })}
                     </ul>
                 </section>
