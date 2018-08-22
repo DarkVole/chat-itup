@@ -22,8 +22,31 @@ and check to see if they have the same roomID as the ActiveRoom.
 
 
 
-NOTE: I think your firebase schema might need to be changes a bit as I don't see any current messages
-for the rooms I created. Also it appears you have rooms in firebase that are unused. We can chat about this when we meet.
+NOTE: I think your firebase schema might need to be changes a bit as I don't see any current messages for the rooms I created. Also it appears you have rooms in firebase that are unused. We can chat about this when we meet.
+
+
+Problems:
+
+In your original code you wrote the map method without the arrow syntax and it
+did not bind it.
+
+You did:
+
+map(function(){
+	
+})
+
+Instead of:
+
+map(()=>{
+	
+})
+
+
+
+Another problem is you did not pass an object to 
+this.setState() and it should look like this:
+this.setState({})
 
 
 
