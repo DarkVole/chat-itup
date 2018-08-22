@@ -32,17 +32,18 @@ class App extends Component {
   }
 
 
-  setRoom(room){ //____________________Part 1
-    // Step#1 
-    this.setState({activeRoom:room})  
+  setRoom(roomKey){ //_______________Part 1
+    console.log(roomKey);
+    this.setState({activeRoom:roomKey})  
 
   }
 
 
   render() {
     return (
-      <div className="App">
-        <RoomList firebase={firebase} /* Part 1 --> */setRoom = {this.setRoom}/>
+      <div className="App">                 {/*Part 1*/}
+        <RoomList firebase={firebase} setRoom = {this.setRoom}/>
+      
 
       </div>
     );

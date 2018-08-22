@@ -34,7 +34,7 @@
          this.roomsRef.on('child_added', snapshot => {
              const room = snapshot.val();
              room.key = snapshot.key;
-             this.setState({ rooms: [...room] })
+             this.setState({ rooms: this.state.rooms.concat( room ) }) 
              this.setState({ value: '' });
          });
 
@@ -42,10 +42,12 @@
 
      render() {
 
-          this.state.rooms.map((val,index)=>{
-              console.log(val);
-              return val
-          })
+          // this.state.rooms.map((val,index)=>{
+          //     console.log(val);
+          //     return val
+          // })
+
+          console.log(this.props);
 
 
              return (
@@ -63,14 +65,18 @@
                     <ul>
 
                     {
-                      this.state.rooms.map(function(val,index){
-                        /*__________Part 1 ____Add event listener___________*/
-                        return <li key={index}>{val.rooms}</li> })
+                      this.state.rooms.map((val,index)=>{
+
+                                   /*_______PART 1_______*/
+                        return <li onClick={()=>this.props.setRoom(val.key)} key={index}>{val.rooms}</li> })
                     }
 
                     </ul>
 
                   </section>
+                     
+
+            
 
               </div>
 
