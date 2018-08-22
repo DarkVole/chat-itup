@@ -30,8 +30,6 @@ class MessageList extends Component {
                 messages: temp
             })
 
-            console.log(this.state.messages);
-
         });
 
     }
@@ -39,13 +37,9 @@ class MessageList extends Component {
 
 
     render() {
-
        //*__________PART 2..... loop through messages
         let messages = this.state.messages.map((val, index) => {
-            console.log(val.roomId);
-
-            if (this.props.activeRoom === val.roomId) { // Check is it has the same roomId as activeRoom
-
+            if (this.props.activeRoom === val.roomId) { // Check is it has the same roomId as activeRoom        
                 return <li key={index}>{val.content}</li> // If TRUE...then render
 
             }
@@ -63,8 +57,6 @@ class MessageList extends Component {
             </div>
 
         )
-
-
 
     }
 }

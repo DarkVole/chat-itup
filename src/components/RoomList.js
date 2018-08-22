@@ -5,9 +5,9 @@
 
      constructor(props) {
          super(props);
-         this.state = { value: '' };
          this.state = {
-             rooms: []
+             rooms: [],
+             value:''
          };
 
          this.roomsRef = this.props.firebase.database().ref('rooms')
@@ -42,15 +42,12 @@
 
      render() {
 
-
              return (
               <div>
-                
                  <section className="roomlist">  
-
                     <form onSubmit={this.createRoom}>
                        <label>Name:
-                       <input type="text" value={this.state.value} onChange={this.handleChange} />
+                       <input value={this.state.value} type="text"  onChange={this.handleChange} />
                        </label>
                        <input type="submit" value="Submit" />
                     </form>
@@ -59,7 +56,6 @@
 
                     {
                       this.state.rooms.map((val,index)=>{
-
                                    /*_______PART 1_______*/
                         return <li onClick={()=>this.props.setRoom(val.key)} key={index}>{val.rooms}</li> })
                     }
