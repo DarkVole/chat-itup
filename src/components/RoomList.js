@@ -42,13 +42,6 @@
 
      render() {
 
-          // this.state.rooms.map((val,index)=>{
-          //     console.log(val);
-          //     return val
-          // })
-
-          console.log(this.props);
-
 
              return (
               <div>
