@@ -6,7 +6,8 @@
      constructor(props) {
          super(props);
          this.state = {
-             rooms: []
+             rooms: [],
+             value:''
          };
 
          this.roomsRef = this.props.firebase.database().ref('rooms')
@@ -49,7 +50,7 @@
 
                     <form onSubmit={this.createRoom}>
                        <label>Name:
-                       <input type="text" onChange={this.handleChange} />
+                       <input value = {this.state.value} type="text" onChange={this.handleChange} />
                        </label>
                        <input type="submit" value="Submit" />
                     </form>
