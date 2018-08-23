@@ -5,6 +5,7 @@ import RoomList from './components/RoomList.js';
 import MessageList from './components/MessageList.js';
 import * as firebase from 'firebase';
 
+// Initialize Firebase
   var config = {
     apiKey: "AIzaSyDx4OOWjNLsnDxkWrUbKZgYITBKcrWvAT8",
     authDomain: "bloc-chat-125e6.firebaseapp.com",
