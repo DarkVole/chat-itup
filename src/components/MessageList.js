@@ -17,25 +17,22 @@
 
 import React, { Component } from 'react';
 
-    class MessageList extends Component {
-
-        constructor(props) {
-            super(props);
-            this.state = {
-                value: '',
-                val:[],
-                rooms: [],
-                messages: [],
-                content: '',
-                activeRoom: '',
-                roomKey: ''
-
-            };
-            this.messagesRef = this.props.firebase.database().ref('messages');
+class MessageList extends Component {
+    constructor(props) {
+        super(props);
+        this.state = {
+            messages: [],
+            username: '',
+            content: '',
+            roomId: '',
+            sentAt: this.props.firebase.database.ServerValue.TIMESTAMP
         }
+        this.messagesRef = this.props.firebase.database().ref('messages');
+    }
 
 
-        render() {
+
+    render() {
             return (
                 < section
                     className="messagelist">

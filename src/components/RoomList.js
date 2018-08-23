@@ -56,11 +56,12 @@ import React, { Component } from 'react';
      // This allows the name of the room to be reflected by x.name and the key for
      // the room to be represented by room.key. Both of these because props
      // activeRoom for the selected Room and roomKey for the key.
+
      setActiveRoom(x) {
          //const roomActive = this.setState({activeRoom:name});
-         console.log("Selected " + x.name);  // for debug
+         console.log("Selected " + x.rooms);  // for debug
          console.log("Key " + x.key);  // for debug
-         this.setState.activeRoom = x.name;;
+         this.setState.activeRoom = (x.rooms);
          this.setState({roomKey:x.key});
 
          this.setState({activeMessages: this.state.message(x)});
@@ -78,7 +79,7 @@ import React, { Component } from 'react';
      });}
 
      setActiveMessages(x) {
-         console.log("Selected " + x.name);  // for debug
+         console.log("Selected " + x);  // for debug
          console.log("Key " + x.key);  // for debug
          this.setState({activeRoom:x.name});
          this.setState({roomKey:x.key});
@@ -107,8 +108,8 @@ import React, { Component } from 'react';
                    <input type="submit" value="Submit" />
                </form>
                <ul>
-                   {this.state.rooms.map(function(val,index){
-                       return (<li key={index}>{val.name}  onClick=(this.setActiveRoom} ></li>)
+                   {this.state.rooms.map((val,index)=>{
+                       return (<li key={index} onClick={this.setActiveRoom({val})}>{val.rooms}</li>)
                    })}
                </ul>
 
