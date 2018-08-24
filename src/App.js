@@ -22,38 +22,29 @@ class App extends Component {
     super(props);
       this.state = {
             activeRoom: '',
-          setActiveRoom: '',
-          activeMessages: '',
-          roomKey:''
         };
 
+this.setRoom = this.setRoom.bind(this); //Bind function
   }
 
-    handleChildClick(activeRoom,event) {
-        alert("The Child button data is: " + activeRoom.childText + " - " + activeRoom.childNumber);
-        alert("The Child HTML is: " + event.target.outerHTML);
-        //remove after working
+    setRoom=(roomKey)=> { //_______________Part 1 - Set roomKey at Parent
+        console.log(roomKey);
+        this.setState({activeRoom: roomKey}) // Note curly inside regular parans
     }
 
   render() {
     return (
-      <div className="app">
+      <div className="app">  {/*Will List Headers and Rooms*/}
         <h1 className="chat-header">Bloc Chat</h1>
         <h3>Chat Rooms:</h3>
-          <RoomList
-           firebase= { firebase }
-           activeRoom={ this.props.activeRoom }/>
-            <MessageList
-            firebase= { firebase }
-            activeMessages={this.props.activeMessages}/>
+          <RoomList firebase={firebase} setRoom = {this.setRoom}/> {/*Calls bind function. Why is this required? */}
+          <p></p>
+            <MessageList firebase={firebase} activeRoom = {this.state.activeRoom}/>  {/*Note firebase = {firebase} is required*/}
 
       </div>
     );
   }
 }
 
-//<h2>Messages</h2>
-//<MessageList
-//firebase = { firebase }
-//messages={ this.state.content } />
+
 export default App;

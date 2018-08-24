@@ -1,19 +1,4 @@
-//        componentDidMount() {
-//             const mess = snapshot.val();
-//             mess.key = snapshot.key;
-//
-//             this.setState(value: '')};
-
-//            <ul>
-//             {this.state.messagess.map((mess, index) =>
-//             <li
-//
-//
-//             {this.state.rooms.map(function(val,index){
-//                 return <li key={index}>{val.rooms}</li> })}
-//             key = {index}> {mess.content}></li>
-//         )}</ul>                 </ div >
-
+// MessageList.js Lists the messages associated with a chosen room
 
 import React, { Component } from 'react';
 
@@ -30,21 +15,44 @@ class MessageList extends Component {
         this.messagesRef = this.props.firebase.database().ref('messages');
     }
 
+// Based on this, I really have to understand what snapshot does.//
+    componentDidMount() {
+        let temp = [];
+        this.messagesRef.on('child_added', snapshot => {
+            console.log(snapshot.val());
+            temp.push(snapshot.val());
+            this.setState({
+                messages: temp
+            })
 
+        });
+
+    }
 
     render() {
-            return (
-                < section
-                    className="messagelist">
+        {/*OK, this is a learning opp. First time I have seen a return*/}
+        {/*that is not directly behind a render.*/}
 
+        let messages = this.state.messages.map((val, index) => {
+            if (this.props.activeRoom === val.roomId) { // Check is it has the same roomId as activeRoom
+                return <li key={index}>{val.content}</li> // If TRUE...then render
 
-                        <h2>All Messages for Testing</h2><ul>
-                    {this.state.messages.map(function(val, index) {
-                        return <li key={index}>{val.content}</li>})}
+            }
+        });
+
+        return (
+            <div>
+
+                <h2>Room Messages</h2>
+                <ul>
+                    {messages}
                 </ul>
-                </section>
-            );
-        }
+
+            </div>
+
+        )
+
     }
+}
 
  export default MessageList;
