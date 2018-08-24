@@ -24,9 +24,11 @@ class App extends Component {
             activeRoom: '',
         };
 
-this.setRoom = this.setRoom.bind(this); //Bind function
+this.setRoom = this.setRoom.bind(this); //Bind function - Need to understand
+     //   more about the differences between bind, this.state for activeRoom
   }
 
+  //*****Function/Method setRoom sets the activeRoom to the value of roomKey
     setRoom=(roomKey)=> { //_______________Part 1 - Set roomKey at Parent
         console.log(roomKey);
         this.setState({activeRoom: roomKey}) // Note curly inside regular parans
