@@ -16,15 +16,34 @@ import * as firebase from 'firebase';
     storageBucket: "bloc-chat-125e6.appspot.com",
     messagingSenderId: "1073569690929"
   };
-  firebase.initializeApp(config);
+
+firebase.initializeApp(config);
 
 
 
 class App extends Component {
+  constructor(props){
+    super(props)
+    this.state = {
+      activeRoom: undefined//___________Part 1
+    };
+
+    this.setRoom = this.setRoom.bind(this);
+  }
+
+
+  setRoom(roomKey){ //_______________Part 1
+    console.log(roomKey);
+    this.setState({activeRoom:roomKey})  
+
+  }
+
+
   render() {
     return (
-      <div className="App">
-      <RoomList firebase={firebase}/>
+      <div className="App">                 {/*Part 1*/}
+        <RoomList firebase={firebase} setRoom = {this.setRoom}/>
+      
 
       </div>
     );
