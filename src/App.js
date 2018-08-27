@@ -3,6 +3,7 @@ import React, { Component } from 'react';
 import './App.css';
 import RoomList from './components/RoomList.js';
 import MessageList from './components/MessageList.js';
+import User from './components/User.js';
 import * as firebase from 'firebase';
 
 // Initialize Firebase
@@ -19,15 +20,20 @@ import * as firebase from 'firebase';
 
 class App extends Component {
     constructor(props) {
-    super(props);
-      this.state = {
+        super(props);
+        this.state = {
             activeRoom: '',
+            users:[]
         };
+        this.setUser = this.setUser.bind(this)
+        this.setRoom = this.setRoom.bind(this); //Bind function - Need to understand
+        //   more about the differences between bind, this.state for activeRoom
+    }
 
-this.setRoom = this.setRoom.bind(this); //Bind function - Need to understand
-     //   more about the differences between bind, this.state for activeRoom
-  }
-
+    setUser = (userKey) => {
+        console.log(userKey);
+        // pass that method down to the  User component as a prop.
+}
   //*****Function/Method setRoom sets the activeRoom to the value of roomKey
     setRoom=(roomKey)=> { //_______________Part 1 - Set roomKey at Parent
         console.log(roomKey);
@@ -42,7 +48,7 @@ this.setRoom = this.setRoom.bind(this); //Bind function - Need to understand
           <RoomList firebase={firebase} setRoom = {this.setRoom}/> {/*Calls bind function. Why is this required? */}
           <p></p>
             <MessageList firebase={firebase} activeRoom = {this.state.activeRoom}/>  {/*Note firebase = {firebase} is required*/}
-
+<User firebase={firebase}/>
       </div>
     );
   }
