@@ -34,8 +34,8 @@ class MessageList extends Component {
         {/*that is not directly behind a render.*/}
 
         let messages = this.state.messages.map((val, index) => {
-            if (this.props.activeRoom === val.roomId) { // Check is it has the same roomId as activeRoom
-                return <li key={index}>{val.content}</li> // If TRUE...then render
+            if (this.props.activeRoom === val.roomId) {
+                return <li key={index}>{val.content}</li>
 
             }
         });
@@ -43,7 +43,7 @@ class MessageList extends Component {
         return (
             <div>
 <h3>Room Selected: {this.props.displayRoomName}</h3>
-                <h2>Room Messages</h2>
+                <h3>Room Messages</h3>
                 <ul>
                     {messages}
                 </ul>

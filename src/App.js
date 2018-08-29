@@ -23,7 +23,9 @@ class App extends Component {
         super(props);
         this.state = {
             activeRoom: '',
+            activeUser: '',
             displayRoomName: '',
+            displayUserName: '',
             activeUser: '',
             users:[]
         };
@@ -32,17 +34,19 @@ class App extends Component {
         //   more about the differences between bind, this.state for activeRoom
     }
 
-    setUser = (userKey) => {
-        console.log(userKey);
-        this.setState({activeUser: userKey})
-        // pass that method down to the  User component as a prop.
-}
+
   //*****Function/Method setRoom sets the activeRoom to the value of roomKey
     setRoom=(roomKey,roomName)=> { //_______________Part 1 - Set roomKey at Parent
         console.log(this.state.displayRoomName);
         this.setState({activeRoom: roomKey})
         this.setState({displayRoomName: roomName})// Note curly inside regular parans
     }
+
+setUser=(userKey,userName)=> {
+    console.log(this.state.displayUserName);
+    this.setState({activeRoom: userKey})
+    this.setState({displayUserName: userName})// Note curly inside regular parans
+}
 
   render() {
     return (
@@ -52,12 +56,13 @@ class App extends Component {
           <RoomList firebase={firebase} setRoom = {this.setRoom}/> {/*Calls bind function. Why is this required? */}
           <p></p>
             <MessageList firebase={firebase} activeRoom = {this.state.activeRoom} displayRoomName = {this.state.displayRoomName}/>  {/*Note firebase = {firebase} is required*/}
-<User firebase={firebase} setUser = {this.setUser}/>
+<User firebase={firebase} setUser = {this.setUser} displayUserName = {this.state.displayUserName}/>
+
 
       </div>
     );
   }
-}
 
+}
 
 export default App;
