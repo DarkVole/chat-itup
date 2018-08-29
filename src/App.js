@@ -23,6 +23,7 @@ class App extends Component {
         super(props);
         this.state = {
             activeRoom: '',
+            activeUser: '',
             users:[]
         };
         this.setUser = this.setUser.bind(this)
@@ -32,6 +33,7 @@ class App extends Component {
 
     setUser = (userKey) => {
         console.log(userKey);
+        this.setState({activeUser: userKey})
         // pass that method down to the  User component as a prop.
 }
   //*****Function/Method setRoom sets the activeRoom to the value of roomKey
@@ -48,7 +50,8 @@ class App extends Component {
           <RoomList firebase={firebase} setRoom = {this.setRoom}/> {/*Calls bind function. Why is this required? */}
           <p></p>
             <MessageList firebase={firebase} activeRoom = {this.state.activeRoom}/>  {/*Note firebase = {firebase} is required*/}
-<User firebase={firebase}/>
+<User firebase={firebase} setUser = {this.setUser}/>
+
       </div>
     );
   }

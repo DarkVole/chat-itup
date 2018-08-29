@@ -62,21 +62,21 @@ class RoomList extends Component {
     render() {
         return (
             <section className="roomlist"> {/*Renders form for new room*/}
-                <form onSubmit={this.createRoom} ><label>Name:
-                    <input type="text" value={this.state.value} onChange={this.handleChange} />
-                </label>
-                    <input type="submit" value="Submit" />
-                </form>
-                <ul>{/*The beloved .map function -- use THIS format*/}
-                    {
-                        this.state.rooms.map((val,index)=>{
-                            /*_______PART 1_______*/
-                            return <li onClick={()=>this.props.setRoom(val.key)} key={index}>{val.rooms}</li> })
-                    }
+            <form onSubmit={this.createRoom} ><label>Name:
+    <input type="text" value={this.state.value} onChange={this.handleChange} />
+        </label>
+        <input type="submit" value="Submit" />
+            </form>
+            <ul>{/*The beloved .map function -- use THIS format*/}
+        {
+            this.state.rooms.map((val,index)=>{
+                /*_______PART 1_______*/
+                return <li onClick={()=>this.props.setRoom(val.key)} key={index}>{val.rooms}</li> })
+            }
 
-                </ul>
-                <h4> Current Chat Room: {this.props.activeRoom.rooms} </h4>
-            </section>
+            </ul>
+            <h4> Current Chat Room: Failed - this.props.activeRoom.rooms </h4>
+        </section>
 
         );
     }
