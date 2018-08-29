@@ -42,7 +42,7 @@ class MessageList extends Component {
 
         return (
             <div>
-
+<h3>Room Selected: {this.props.displayRoomName}</h3>
                 <h2>Room Messages</h2>
                 <ul>
                     {messages}

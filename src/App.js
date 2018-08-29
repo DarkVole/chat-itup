@@ -23,6 +23,7 @@ class App extends Component {
         super(props);
         this.state = {
             activeRoom: '',
+            displayRoomName: '',
             activeUser: '',
             users:[]
         };
@@ -37,9 +38,10 @@ class App extends Component {
         // pass that method down to the  User component as a prop.
 }
   //*****Function/Method setRoom sets the activeRoom to the value of roomKey
-    setRoom=(roomKey)=> { //_______________Part 1 - Set roomKey at Parent
-        console.log(roomKey);
-        this.setState({activeRoom: roomKey}) // Note curly inside regular parans
+    setRoom=(roomKey,roomName)=> { //_______________Part 1 - Set roomKey at Parent
+        console.log(this.state.displayRoomName);
+        this.setState({activeRoom: roomKey})
+        this.setState({displayRoomName: roomName})// Note curly inside regular parans
     }
 
   render() {
@@ -49,7 +51,7 @@ class App extends Component {
         <h3>Chat Rooms:</h3>
           <RoomList firebase={firebase} setRoom = {this.setRoom}/> {/*Calls bind function. Why is this required? */}
           <p></p>
-            <MessageList firebase={firebase} activeRoom = {this.state.activeRoom}/>  {/*Note firebase = {firebase} is required*/}
+            <MessageList firebase={firebase} activeRoom = {this.state.activeRoom} displayRoomName = {this.state.displayRoomName}/>  {/*Note firebase = {firebase} is required*/}
 <User firebase={firebase} setUser = {this.setUser}/>
 
       </div>
