@@ -4,7 +4,7 @@
 //
 import React, { Component } from 'react';
 import * as firebase from 'firebase';
-var provider = new firebase.auth.GoogleAuthProvider();
+
 class User extends Component {
 
     constructor(props) {
@@ -15,33 +15,25 @@ class User extends Component {
         };
         this.userRef = this.props.firebase.database().ref('users');
         this.handleThisChange = this.handleThisChange.bind(this);
-        this.googleSignin = this.googleSignin.bind(this);
+        this.googleSignIn = this.googleSignIn.bind(this);
         this.googleSignOut = this.googleSignout.bind(this);
         this.createUser = this.createUser.bind(this);
 
     }
     // *****Function Section********************************
-
-    handleThisChange(event) {
-        this.setState({value: event.target.value});
-        console.log("event handled")
+    componentDidMount(user) {
+        this.props.firebase.auth().onAuthStateChanged( user => {
+            this.props.setUser(user);
+        });
     }
 
-     googleSignin() {
-        firebase.auth()
+    googleSignIn(){
+        alert("sign in started")
+        const provider = new this.props.firebase.auth.GoogleAuthProvider();
+        this.props.firebase.auth().signInWithPopup(provider).then((result) => {
+            const user = result.user;
+            this.props.setUser(" ",user);
 
-            .signInWithPopup(provider).then(function(result) {
-            var token = result.credential.accessToken;
-            var user = result.user;
-
-            console.log(token)
-            console.log(user)
-        }).catch(function(error) {
-            var errorCode = error.code;
-            var errorMessage = error.message;
-
-            console.log(error.code)
-            console.log(error.message)
         });
     }
 
@@ -49,6 +41,11 @@ class User extends Component {
          firebase.auth().signOut();
          alert('User Signed Out');
 
+    }
+
+    handleThisChange(event) {
+        this.setState({value: event.target.value});
+        console.log("event handled")
     }
     createUser(event) {
         //userRef is the firebase ref from above. We are pushing the value variable
@@ -59,26 +56,24 @@ class User extends Component {
         event.preventDefault(); //Prevents the event from cause an error
     console.log(this.state.value)}
 
-  //  componentDidMount() {
- //       this.props.firebase.auth().onAuthStateChanged( user => {
- //           this.props.setUser(user);
-    componentDidMount() {
-        this.userRef.on('child_added', snapshot => {
-            const user = snapshot.val();
-            user.key = snapshot.key;
-            this.setState({ users: this.state.users.concat( user ) })
-            this.setState({ value: '' });
-        });
-        this.props.firebase.auth().onAuthStateChanged( user => {
-            this.props.setUser(user);
-        });
-    }
+
+
+
+
+  //      this.userRef.on('child_added', snapshot => {
+   //         const user = snapshot.val();
+     //       user.key = snapshot.key;
+      //      this.setState({users: this.state.users.concat(user)})
+      //      this.setState({value: ''});
+       // });
+
+
 
     render() {
         return (
 
             <section className="userlogs">
-                <button onClick ={this.googleSignin} >Sign In</button>
+                <button onClick ={this.googleSignIn} >Sign In</button>
 
                     <form onSubmit={this.createUser} ><label>User Name:
                         <input type="text" value={this.state.value} onChange={this.handleThisChange} />

@@ -43,9 +43,9 @@ class App extends Component {
     }
 
 setUser=(userKey,userName)=> {
-    console.log(this.state.displayUserName);
-    this.setState({activeRoom: userKey})
-    this.setState({displayUserName: userName})// Note curly inside regular parans
+    console.log(this.state.userName);
+ //   this.setState({activeRoom: userKey})
+ //   this.setState({displayUserName: userName})// Note curly inside regular parans
 }
 
   render() {
