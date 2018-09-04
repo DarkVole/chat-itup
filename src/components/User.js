@@ -12,6 +12,7 @@ class User extends Component {
         this.state = {
             value: '',
             users: [],
+            baseUser:''
         };
         this.userRef = this.props.firebase.database().ref('users');
         this.handleThisChange = this.handleThisChange.bind(this);
@@ -28,11 +29,14 @@ class User extends Component {
     }
 
     googleSignIn(){
-        alert("sign in started")
+
         const provider = new this.props.firebase.auth.GoogleAuthProvider();
         this.props.firebase.auth().signInWithPopup(provider).then((result) => {
-            const user = result.user;
-            this.props.setUser(" ",user);
+            //const user = result.user;
+            this.props.setUser(" ", user);
+            const user = firebase.auth().currentUser
+            console.log(user.displayName);
+            console.log(user);
 
         });
     }
@@ -51,9 +55,9 @@ class User extends Component {
         //userRef is the firebase ref from above. We are pushing the value variable
         // that has been declasred as a prop and was attached to the input box.
 
-       this.userRef.push({userName: this.state.value});
-        alert('A user has been added: ' + this.state.value); // delete when working
-        event.preventDefault(); //Prevents the event from cause an error
+       //this.userRef.push({userName: this.state.value});
+       // alert('A user has been added: ' + this.state.value); // delete when working
+        //event.preventDefault(); //Prevents the event from cause an error
     console.log(this.state.value)}
 
 
@@ -73,6 +77,7 @@ class User extends Component {
         return (
 
             <section className="userlogs">
+            <h4> Username: {this.props.user ? this.props.user.displayName : 'Guest'}</h4>
                 <button onClick ={this.googleSignIn} >Sign In</button>
 
                     <form onSubmit={this.createUser} ><label>User Name:
