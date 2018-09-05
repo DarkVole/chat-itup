@@ -12,7 +12,7 @@ class User extends Component {
         this.state = {
             value: '',
             users: [],
-            baseUser:''
+            showName: '',
         };
         this.userRef = this.props.firebase.database().ref('users');
         this.handleThisChange = this.handleThisChange.bind(this);
@@ -33,18 +33,28 @@ class User extends Component {
         const provider = new this.props.firebase.auth.GoogleAuthProvider();
         this.props.firebase.auth().signInWithPopup(provider).then((result) => {
             //const user = result.user;
-            this.props.setUser(" ", user);
             const user = firebase.auth().currentUser
+            this.props.setUser(user, user.displayName);
             console.log(user.displayName);
             console.log(user);
-
+            const baseUser=user.displayName;
+            console.log(baseUser)
+            this.handleName(user.displayName)
         });
     }
 
      googleSignout() {
-         firebase.auth().signOut();
-         alert('User Signed Out');
 
+         firebase.auth().signOut();
+     //    const guestConstant = "Guest";
+      //   this.setState(showName: guestConstant);
+      //   alert('User Signed Out');
+        // this.handleName("   ")
+    }
+
+    handleName(userName) {
+        console.log(userName);
+            this.setState({showName: userName})
     }
 
     handleThisChange(event) {
@@ -77,7 +87,7 @@ class User extends Component {
         return (
 
             <section className="userlogs">
-            <h4> Username: {this.props.user ? this.props.user.displayName : 'Guest'}</h4>
+
                 <button onClick ={this.googleSignIn} >Sign In</button>
 
                     <form onSubmit={this.createUser} ><label>User Name:
@@ -96,6 +106,8 @@ class User extends Component {
                     </ul>
 
 <p>Current User: {this.props.displayUserName}</p>
+        <p>Current User2: {this.state.showName}</p>
+
                 <button onClick ={this.googleSignout} >Sign Out</button>
             </section>
 

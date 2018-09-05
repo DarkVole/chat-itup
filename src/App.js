@@ -43,7 +43,7 @@ class App extends Component {
     }
 
 setUser=(userKey,userName)=> {
-    console.log(this.state.userName);
+    console.log(userName);
     this.setState({activeRoom: userKey})
     this.setState({displayUserName: userName})// Note curly inside regular parans
 }
