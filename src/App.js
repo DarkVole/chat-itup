@@ -30,12 +30,11 @@ class App extends Component {
             users:[]
         };
         this.setUser = this.setUser.bind(this)
-        this.setRoom = this.setRoom.bind(this); //Bind function - Need to understand
-        //   more about the differences between bind, this.state for activeRoom
+        this.setRoom = this.setRoom.bind(this);
     }
 
 
-  //*****Function/Method setRoom sets the activeRoom to the value of roomKey
+  //*****Functions*********
     setRoom=(roomKey,roomName)=> { //_______________Part 1 - Set roomKey at Parent
         console.log(this.state.displayRoomName);
         this.setState({activeRoom: roomKey})
@@ -58,7 +57,6 @@ setUser=(userKey,userName)=> {
             <MessageList firebase={firebase} activeRoom = {this.state.activeRoom} displayRoomName = {this.state.displayRoomName}/>  {/*Note firebase = {firebase} is required*/}
 <User firebase={firebase} setUser = {this.setUser} displayUserName = {this.state.displayUserName}/>
 
-
       </div>
     );
   }
@@ -66,3 +64,10 @@ setUser=(userKey,userName)=> {
 }
 
 export default App;
+// App.js
+// Functions
+//  setRoom=(roomKey,roomName) takes the key and roomName from firebase rooms
+//      and sets them to activeRoom and displayRoomName (W. Turner original format -
+//      replace when able.
+//  setUser=(userKey,userName) is a copy of above for users. Remove key method
+//      able.

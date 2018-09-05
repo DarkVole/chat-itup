@@ -1,8 +1,3 @@
-// RoomList.js
-// Lists all the Rooms
-// Allows you to create a Room
-// Allows you to select a room and display its messages
-
 
 import React, { Component } from 'react';
 class RoomList extends Component {
@@ -12,39 +7,24 @@ class RoomList extends Component {
         this.state = {
             value: '',
             rooms: [],
-
         };
-
 
         this.roomsRef = this.props.firebase.database().ref('rooms');
         this.handleChange = this.handleChange.bind(this);
         this.createRoom = this.createRoom.bind(this);
     }
 
-    // *****Function Section********************************
+    // *****Functions - Descriptions at bottom ********************************
 
-    // This function [handleChange(event)] is called when when there is
-    // form submit. It sets the the varible value to the that was
-    // entered into the form
     handleChange(event) {
         this.setState({value: event.target.value});
     }
 
-    // This function creates a Room from an input box when selected
-    // on the click of a submit button
     createRoom(event) {
-        //RoomRef is the firebase ref from above. We are pushing the value variable
-        // that has been declasred as a prop and was attached to the input box.
         this.roomsRef.push({roomName: this.state.value});
-        alert('A room has been created: ' + this.state.value); // delete when working
         event.preventDefault(); //Prevents the event from cause an error
     }
 
-
-// An internal function that executes all of the commands inside of it.
-    // It occurs when this component did successful execute, or mount
-    // Follow up Q: What does snapshot do?
-    // Q: Why does room.key not need a const or this.setState?
     componentDidMount() {
         this.roomsRef.on('child_added', snapshot => {
             const room = snapshot.val();
@@ -54,11 +34,6 @@ class RoomList extends Component {
         });
     }
 
-
-
-    //Comments in render must look like {/*Comments*/}
-
-
     render() {
         return (
             <section className="roomlist"> {/*Renders form for new room*/}
@@ -67,19 +42,25 @@ class RoomList extends Component {
         </label>
         <input type="submit" value="Submit" />
             </form>
-            <ul>{/*The beloved .map function -- use THIS format*/}
+            <ul>
         {
             this.state.rooms.map((val,index)=>{
-                /*_______PART 1_______*/
                 return <li onClick={()=>this.props.setRoom(val.key,val.roomName)} key={index}>{val.roomName}</li> })
             }
-
             </ul>
-
         </section>
-
         );
     }
 
 }
 export default RoomList;
+
+// *RoomList.js*
+// Lists all the Rooms, allows you to create a Room, allows you to select a room and display its messages
+// Functions
+//   handleChange(event) occurs with every change
+//   createRoom(event) pushes a new room name to firebase from a Submit form
+//   componentDidMount() executes all statements within it when this component starts
+//      The statements make a copy of the firebase rooms using snapshot
+//      and then concat
+// Comments in render must look like {/*Comments*/}
