@@ -35,7 +35,7 @@ class RoomList extends Component {
     createRoom(event) {
         //RoomRef is the firebase ref from above. We are pushing the value variable
         // that has been declasred as a prop and was attached to the input box.
-        this.roomsRef.push({rooms: this.state.value});
+        this.roomsRef.push({roomName: this.state.value});
         alert('A room has been created: ' + this.state.value); // delete when working
         event.preventDefault(); //Prevents the event from cause an error
     }
