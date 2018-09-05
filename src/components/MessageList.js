@@ -1,4 +1,3 @@
-// MessageList.js Lists the messages associated with a chosen room
 
 import React, { Component } from 'react';
 
@@ -14,8 +13,7 @@ class MessageList extends Component {
         }
         this.messagesRef = this.props.firebase.database().ref('messages');
     }
-
-// Based on this, I really have to understand what snapshot does.//
+    // **********Functions **********************
     componentDidMount() {
         let temp = [];
         this.messagesRef.on('child_added', snapshot => {
@@ -24,35 +22,27 @@ class MessageList extends Component {
             this.setState({
                 messages: temp
             })
-
         });
-
     }
 
     render() {
-        {/*OK, this is a learning opp. First time I have seen a return*/}
-        {/*that is not directly behind a render.*/}
-
         let messages = this.state.messages.map((val, index) => {
             if (this.props.activeRoom === val.roomId) {
                 return <li key={index}>{val.content}</li>
-
             }
         });
-
         return (
             <div>
-<h3>Room Selected: {this.props.displayRoomName}</h3>
+                <h3>Room Selected: {this.props.displayRoomName}</h3>
                 <h3>Room Messages</h3>
                 <ul>
                     {messages}
                 </ul>
-
             </div>
-
         )
-
     }
 }
 
  export default MessageList;
+// MessageList.js Lists the messages associated with a chosen room
+//     componentDidMount() loads a copy of the firebase messages
