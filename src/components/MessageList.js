@@ -44,5 +44,6 @@ class MessageList extends Component {
 }
 
  export default MessageList;
+// **********Comments Section****************
 // MessageList.js Lists the messages associated with a chosen room
 //     componentDidMount() loads a copy of the firebase messages

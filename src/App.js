@@ -41,10 +41,8 @@ class App extends Component {
         this.setState({displayRoomName: roomName})// Note curly inside regular parans
     }
 
-setUser=(userKey,userName)=> {
-    console.log(userName);
-    this.setState({activeRoom: userKey})
-    this.setState({displayUserName: userName})// Note curly inside regular parans
+setUser=(user)=> {
+        this.setState({activeUser: user})
 }
 
   render() {
@@ -55,7 +53,7 @@ setUser=(userKey,userName)=> {
           <RoomList firebase={firebase} setRoom = {this.setRoom}/> {/*Calls bind function. Why is this required? */}
           <p></p>
             <MessageList firebase={firebase} activeRoom = {this.state.activeRoom} displayRoomName = {this.state.displayRoomName}/>  {/*Note firebase = {firebase} is required*/}
-<User firebase={firebase} setUser = {this.setUser} displayUserName = {this.state.displayUserName}/>
+      <User firebase={firebase} setUser = {this.setUser} user = {this.state.activeUser}/>
 
       </div>
     );

@@ -7,12 +7,9 @@ class User extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            value: '',
-            users: [],
-            showName: '',
+
         };
         this.userRef = this.props.firebase.database().ref('users');
-        this.handleThisChange = this.handleThisChange.bind(this);
         this.googleSignIn = this.googleSignIn.bind(this);
         this.googleSignOut = this.googleSignout.bind(this);
 
@@ -28,21 +25,11 @@ class User extends Component {
     googleSignIn(){
 
         const provider = new this.props.firebase.auth.GoogleAuthProvider();
-        this.props.firebase.auth().signInWithPopup(provider).then((result) => {
-            //const user = result.user;
-            const user = firebase.auth().currentUser
-            this.props.setUser(user, user.displayName);
-        });
+        this.props.firebase.auth().signInWithPopup( provider );
     }
 
      googleSignout() {
          firebase.auth().signOut();
-    }
-
-
-    handleThisChange(event) {
-        this.setState({value: event.target.value});
-        console.log("event handled")
     }
 
 
@@ -51,7 +38,7 @@ class User extends Component {
 
             <section className="userlogs">
                 <button onClick ={this.googleSignIn} >Sign In</button>
-                <p>Current User: {this.props.displayUserName}</p>
+                <p>Current User: { this.props.user ? this.props.user.displayName : 'Guest' }</p>
                 <button onClick ={this.googleSignout} >Sign Out</button>
             </section>
 
