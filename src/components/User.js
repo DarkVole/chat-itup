@@ -40,6 +40,7 @@ class User extends Component {
                 <button onClick ={this.googleSignIn} >Sign In</button>
                 <p>Current User: { this.props.user ? this.props.user.displayName : 'Guest' }</p>
                 <button onClick ={this.googleSignout} >Sign Out</button>
+
             </section>
 
         );
@@ -50,4 +51,3 @@ export default User;
 // UserList.js
 // Handles Sign In, Display and Sign Out of User
 //
-

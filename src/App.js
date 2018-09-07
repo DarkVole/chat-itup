@@ -48,11 +48,12 @@ setUser=(user)=> {
   render() {
     return (
       <div className="app">  {/*Will List Headers and Rooms*/}
+
         <h1 className="chat-header">Bloc Chat</h1>
         <h3>Chat Rooms:</h3>
           <RoomList firebase={firebase} setRoom = {this.setRoom}/> {/*Calls bind function. Why is this required? */}
           <p></p>
-            <MessageList firebase={firebase} activeRoom = {this.state.activeRoom} displayRoomName = {this.state.displayRoomName}/>  {/*Note firebase = {firebase} is required*/}
+            <MessageList firebase={firebase} activeRoom = {this.state.activeRoom} displayRoomName = {this.state.displayRoomName} user = {this.state.activeUser}/>  {/*Note firebase = {firebase} is required*/}
       <User firebase={firebase} setUser = {this.setUser} user = {this.state.activeUser}/>
 
       </div>
