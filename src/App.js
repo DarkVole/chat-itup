@@ -48,7 +48,8 @@ setUser=(user)=> {
   render() {
     return (
       <div className="app">  {/*Will List Headers and Rooms*/}
-
+      <img src="https://i.imgur.com/Wg9WVCi.jpg"  alt="chat logo"  width="100">
+    </img>
         <h1 className="chat-header">Bloc Chat</h1>
         <h3>Chat Rooms:</h3>
           <RoomList firebase={firebase} setRoom = {this.setRoom}/> {/*Calls bind function. Why is this required? */}
