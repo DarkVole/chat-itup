@@ -28,8 +28,8 @@ class RoomList extends Component {
     }
 
   deleteRoom() {
-
-    let txt = this.props.displayRoomName ?  this.props.displayRoomName : alert("Error - No Room Selected")
+    this.props.displayRoomName ? alert ("Are you sure you want to delete "+  this.props.displayRoomName+"?")
+    : alert("Error - No Room Selected")
 
   }
 
