@@ -16,8 +16,6 @@ class MessageList extends Component {
     }
     // **********Functions **********************
     componentDidMount() {
-        let temp = [];
-
 
               this.messagesRef.on('child_added', snapshot => {
                   const message = snapshot.val();
@@ -32,11 +30,26 @@ class MessageList extends Component {
         console.log(event.target.value);
     }
 
+    createTimeFormat(timestamp) {
+      //var timestamp   = snapshot.val().timestamp.toString().substring(0,10),
+      var date        = new Date(timestamp),
+      datevalues  = [
+                   date.getFullYear(),
+                   date.getMonth()+1,
+                   date.getDate(),
+                   date.getHours(),
+                   date.getMinutes(),
+                   date.getSeconds(),
+
+                ]; //=> [2011, 3, 25, 23, 0, 0]
+    var formatDate =  datevalues[2]+"/"+datevalues[1]+"/"+datevalues[0]+ " "+datevalues[3]+":"+datevalues[4];
+    return formatDate}
+
     createMessage(event) {
 
         this.messagesRef.push({content: this.state.value,
           sentAt: this.props.firebase.database.ServerValue.TIMESTAMP,
-        roomId: this.props.activeRoom ? this.props.activeRoom : "-LLpPzOidUxEPPpemVXb" ,
+        roomId: this.props.activeRoom ? this.props.activeRoom : "-A1000" ,
       userName: this.props.user ? this.props.user.displayName : 'Guest'});
 
         event.preventDefault(); //Prevents the event from cause an error
@@ -47,12 +60,12 @@ class MessageList extends Component {
     render() {
         let messages = this.state.messages.map((val, index) => {
             if (this.props.activeRoom === val.roomId) {
-                return <li key={index}>{val.content}</li>
+                return <li key={index}>{val.content+ ": " + this.createTimeFormat(val.sentAt)}</li>
             }
         });
         return (
             <section className="addingMessage">
-                <h3>Room Selected: {this.props.displayRoomName ? this.props.displayRoomName : "None - Messages go to Main"}</h3>
+                <h3>Room Selected: {this.props.displayRoomName ? this.props.displayRoomName : "None - Messages go to Default"}</h3>
                 <h3>Room Messages</h3>
                 <ul>
                     {messages}

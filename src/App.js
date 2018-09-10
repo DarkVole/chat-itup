@@ -52,10 +52,10 @@ setUser=(user)=> {
     </img>
         <h1 className="chat-header">Bloc Chat</h1>
         <h3>Chat Rooms:</h3>
-          <RoomList firebase={firebase} setRoom = {this.setRoom}/> {/*Calls bind function. Why is this required? */}
+          <RoomList firebase={firebase} setRoom = {this.setRoom} displayRoomName = {this.state.displayRoomName}/>
           <p></p>
             <MessageList firebase={firebase} activeRoom = {this.state.activeRoom} displayRoomName = {this.state.displayRoomName} user = {this.state.activeUser}/>  {/*Note firebase = {firebase} is required*/}
-      <User firebase={firebase} setUser = {this.setUser} user = {this.state.activeUser}/>
+      <User firebase={firebase} setUser = {this.setUser} user = {this.state.activeUser }/>
 
       </div>
     );
