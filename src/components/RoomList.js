@@ -13,7 +13,6 @@ class RoomList extends Component {
         this.handleChange = this.handleChange.bind(this);
         this.createRoom = this.createRoom.bind(this);
         this.deleteRoom = this.deleteRoom.bind(this);
-        this.renameRoom = this.renameRoom.bind(this);
     }
 
     // *****Functions - Descriptions at bottom ********************************
@@ -27,15 +26,11 @@ class RoomList extends Component {
         event.preventDefault(); //Prevents the event from cause an error
     }
 
-  deleteRoom() {
-    this.props.displayRoomName ? alert ("Are you sure you want to delete "+  this.props.displayRoomName+"?")
-    : alert("Error - No Room Selected")
-
-  }
-
-  renameRoom(event) {
-    alert ("rename room called");
-  }
+    deleteRoom(event) {
+      alert (this.props.activeRoom);
+      this.roomsRef.child(this.props.activeRoom).remove();
+      window.location.reload()
+    }
 
     componentDidMount() {
         this.roomsRef.on('child_added', snapshot => {
@@ -60,10 +55,8 @@ class RoomList extends Component {
                 return <li onClick={()=>this.props.setRoom(val.key,val.roomName)} key={index}>{val.roomName}</li> })
             }
             </ul>
-            <button onClick = {this.deleteRoom}>Delete Selected Room?</button>
-            <button onClick ={this.renameRoom}>Rename Selected Room?</button>
+            <button onClick={this.deleteRoom}>Delete Room</button>
             </section>
-
         );
     }
 

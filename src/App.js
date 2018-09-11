@@ -35,10 +35,11 @@ class App extends Component {
 
 
   //*****Functions*********
-    setRoom=(roomKey,roomName)=> { //_______________Part 1 - Set roomKey at Parent
+    setRoom=(roomKey,roomName, roomIndex)=> { //_______________Part 1 - Set roomKey at Parent
         console.log(this.state.displayRoomName);
         this.setState({activeRoom: roomKey})
         this.setState({displayRoomName: roomName})// Note curly inside regular parans
+        this.setState({activeRoomIndex: roomIndex})
     }
 
 setUser=(user)=> {
@@ -52,7 +53,7 @@ setUser=(user)=> {
     </img>
         <h1 className="chat-header">Bloc Chat</h1>
         <h3>Chat Rooms:</h3>
-          <RoomList firebase={firebase} setRoom = {this.setRoom} displayRoomName = {this.state.displayRoomName}/>
+          <RoomList firebase={firebase} setRoom = {this.setRoom} displayRoomName = {this.state.displayRoomName} activeRoom = {this.state.activeRoom}/>
           <p></p>
             <MessageList firebase={firebase} activeRoom = {this.state.activeRoom} displayRoomName = {this.state.displayRoomName} user = {this.state.activeUser}/>  {/*Note firebase = {firebase} is required*/}
       <User firebase={firebase} setUser = {this.setUser} user = {this.state.activeUser }/>
