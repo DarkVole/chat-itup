@@ -13,6 +13,7 @@ class RoomList extends Component {
         this.handleChange = this.handleChange.bind(this);
         this.createRoom = this.createRoom.bind(this);
         this.deleteRoom = this.deleteRoom.bind(this);
+        this.renameRoom = this.renameRoom.bind(this);
     }
 
     // *****Functions - Descriptions at bottom ********************************
@@ -30,6 +31,13 @@ class RoomList extends Component {
       alert (this.props.activeRoom);
       this.roomsRef.child(this.props.activeRoom).remove();
       window.location.reload()
+    }
+
+    renameRoom(event) {
+      this.roomsRef.update({roomName: this.state.value});
+      window.location.reload()
+
+
     }
 
     componentDidMount() {
@@ -56,6 +64,7 @@ class RoomList extends Component {
             }
             </ul>
             <button onClick={this.deleteRoom}>Delete Room</button>
+            <button onClick={this.renameRoom}>Update Room</button>
             </section>
         );
     }
