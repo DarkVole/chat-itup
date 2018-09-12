@@ -6,6 +6,7 @@ class RoomList extends Component {
         super(props);
         this.state = {
             value: '',
+            value2: '',
             rooms: [],
         };
 
@@ -13,13 +14,14 @@ class RoomList extends Component {
         this.handleChange = this.handleChange.bind(this);
         this.createRoom = this.createRoom.bind(this);
         this.deleteRoom = this.deleteRoom.bind(this);
-        this.renameRoom = this.renameRoom.bind(this);
+    //    this.renameRoom = this.renameRoom.bind(this);
     }
 
     // *****Functions - Descriptions at bottom ********************************
 
     handleChange(event) {
         this.setState({value: event.target.value});
+        console.log(event.target.value);
     }
 
     createRoom(event) {
@@ -28,26 +30,29 @@ class RoomList extends Component {
     }
 
     deleteRoom(event) {
-      alert (this.props.activeRoom);
-      this.roomsRef.child(this.props.activeRoom).remove();
-      window.location.reload()
+        this.props.displayRoomName ? alert ("Are you sure you want to delete "+  this.props.displayRoomName+"?")
+        : alert("Error - No Room Selected");
+        this.roomsRef.child(this.props.activeRoom).remove();
+        window.location.reload()
     }
 
-    renameRoom(event) {
-      this.roomsRef.update({roomName: this.state.value});
-      window.location.reload()
 
-
-    }
+      //renameRoom(event) {
+    //      this.roomsRef.child(this.props.activeRoom)({roomKey.child: this.state.value});
+    //      event.preventDefault(); //Prevents the event from cause an error
+    //      console.log(this.state.value)
+    //      window.location.reload()
+    //}
 
     componentDidMount() {
-        this.roomsRef.on('child_added', snapshot => {
+            this.roomsRef.on('child_added', snapshot => {
             const room = snapshot.val();
-            room.key = snapshot.key;
+            room.key = snapshot.key; // roomkey errors mean firebase entry error
             this.setState({ rooms: this.state.rooms.concat( room ) })
             this.setState({ value: '' });
         });
-    }
+      }
+
 
     render() {
         return (
@@ -64,7 +69,12 @@ class RoomList extends Component {
             }
             </ul>
             <button onClick={this.deleteRoom}>Delete Room</button>
-            <button onClick={this.renameRoom}>Update Room</button>
+
+            {/*}//<form onSubmit={this.renameRoom} ><label>New Name:
+            //<input type="text" value={"Test Room"} onChange={this.handleChange} />
+            //</label>
+            //<input type="submit" value="Change" />
+            //</form>*/}
             </section>
         );
     }
@@ -81,3 +91,5 @@ export default RoomList;
 //      The statements make a copy of the firebase rooms using snapshot
 //      and then concat
 // Comments in render must look like {/*Comments*/}
+
+// Component child change is probably required
