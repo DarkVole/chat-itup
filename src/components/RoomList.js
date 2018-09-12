@@ -14,14 +14,15 @@ class RoomList extends Component {
         this.handleChange = this.handleChange.bind(this);
         this.createRoom = this.createRoom.bind(this);
         this.deleteRoom = this.deleteRoom.bind(this);
-    //    this.renameRoom = this.renameRoom.bind(this);
+        this.renameRoom = this.renameRoom.bind(this);
     }
 
     // *****Functions - Descriptions at bottom ********************************
 
     handleChange(event) {
         this.setState({value: event.target.value});
-        console.log(event.target.value);
+        this.setState({value2: event.target.value2});
+        console.log(event.target.value2);
     }
 
     createRoom(event) {
@@ -37,8 +38,14 @@ class RoomList extends Component {
     }
 
 
-      //renameRoom(event) {
-    //      this.roomsRef.child(this.props.activeRoom)({roomKey.child: this.state.value});
+      renameRoom(event) {
+                  alert (this.props.displayRoomName);
+          this.roomsRef.child(this.props.activeRoom).update({roomName: this.state.value});
+          //.roomName: this.state.value2);
+
+        }
+
+
     //      event.preventDefault(); //Prevents the event from cause an error
     //      console.log(this.state.value)
     //      window.location.reload()
@@ -70,11 +77,11 @@ class RoomList extends Component {
             </ul>
             <button onClick={this.deleteRoom}>Delete Room</button>
 
-            {/*}//<form onSubmit={this.renameRoom} ><label>New Name:
-            //<input type="text" value={"Test Room"} onChange={this.handleChange} />
-            //</label>
-            //<input type="submit" value="Change" />
-            //</form>*/}
+            <form onSubmit={this.renameRoom} ><label>New Name:
+            <input type="text" value2={"Test Room"} onChange={this.handleChange} />
+            </label>
+            <input type="submit" value="Change" />
+            </form>
             </section>
         );
     }
