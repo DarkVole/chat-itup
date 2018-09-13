@@ -26,11 +26,13 @@ class App extends Component {
             activeUser: '',
             displayRoomName: '',
             displayUserName: '',
+            displayMessageContent: '',
             activeUser: '',
             users:[]
         };
-        this.setUser = this.setUser.bind(this)
+        this.setUser = this.setUser.bind(this);
         this.setRoom = this.setRoom.bind(this);
+        this.setMessage = this.setMessage.bind(this);
     }
 
 
@@ -41,6 +43,14 @@ class App extends Component {
         this.setState({displayRoomName: roomName})// Note curly inside regular parans
         this.setState({activeRoomIndex: roomIndex})
     }
+
+    setMessage=(key,name )=> { //_______________Part 1 - Set roomKey at Parent
+
+        this.setState({activeMessage: key})
+        this.setState({displayMessageContent: name})// Note curly inside regular parans
+        console.log(this.state.displayMessageContent);
+  }
+
 
 setUser=(user)=> {
         this.setState({activeUser: user})
@@ -55,7 +65,7 @@ setUser=(user)=> {
         <h3>Chat Rooms:</h3>
           <RoomList firebase={firebase} setRoom = {this.setRoom} displayRoomName = {this.state.displayRoomName} activeRoom = {this.state.activeRoom}/>
           <p></p>
-            <MessageList firebase={firebase} activeRoom = {this.state.activeRoom} displayRoomName = {this.state.displayRoomName} user = {this.state.activeUser}/>  {/*Note firebase = {firebase} is required*/}
+            <MessageList firebase={firebase} activeRoom = {this.state.activeRoom} displayRoomName = {this.state.displayRoomName} user = {this.state.activeUser} setMessage = {this.setMessage} displayMessageContent = {this.state.displayMessageContent}/>  {/*Note firebase = {firebase} is required*/}
       <User firebase={firebase} setUser = {this.setUser} user = {this.state.activeUser }/>
 
       </div>

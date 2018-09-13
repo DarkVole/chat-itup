@@ -31,25 +31,21 @@ class RoomList extends Component {
     }
 
     deleteRoom(event) {
+      console.log(this.props.displayRoomName)
         this.props.displayRoomName ? alert ("Are you sure you want to delete "+  this.props.displayRoomName+"?")
         : alert("Error - No Room Selected");
         this.roomsRef.child(this.props.activeRoom).remove();
         window.location.reload()
     }
 
-
+  
       renameRoom(event) {
-                  alert (this.props.displayRoomName);
+          //alert (this.props.displayRoomName);
           this.roomsRef.child(this.props.activeRoom).update({roomName: this.state.value});
-          //.roomName: this.state.value2);
-
+          window.location.reload()
         }
 
 
-    //      event.preventDefault(); //Prevents the event from cause an error
-    //      console.log(this.state.value)
-    //      window.location.reload()
-    //}
 
     componentDidMount() {
             this.roomsRef.on('child_added', snapshot => {
@@ -98,5 +94,3 @@ export default RoomList;
 //      The statements make a copy of the firebase rooms using snapshot
 //      and then concat
 // Comments in render must look like {/*Comments*/}
-
-// Component child change is probably required

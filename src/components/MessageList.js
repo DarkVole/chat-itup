@@ -7,12 +7,15 @@ class MessageList extends Component {
         super(props);
         this.state = {
             value: '',
-            messages: []
+            messages: [],
+            activeMessage: '',
+            //displayMessageContent: '',
 
         }
         this.messagesRef = this.props.firebase.database().ref('messages');
         this.handleChange = this.handleChange.bind(this);
         this.createMessage = this.createMessage.bind(this);
+        this.deleteMessage = this.deleteMessage.bind(this);
     }
     // **********Functions **********************
     componentDidMount() {
@@ -53,30 +56,52 @@ class MessageList extends Component {
       userName: this.props.user ? this.props.user.displayName : 'Guest'});
 
         event.preventDefault(); //Prevents the event from cause an error
+    }
 
+    deleteMessage(event) {
+      console.log(this.props.displayMessageContent)
+        //this.props.displayMessageContent ? alert ("Are you sure you want to delete "+  this.props.displayMessageContent+"?")
+        //: alert("Error - No Room Selected");
+        this.messagesRef.child(this.state.activeMessage).remove();
+        window.location.reload()
+    }
 
+    setMessage=(roomKey,roomName)=> { //_______________Part 1 - Set roomKey at Parent
+        console.log(roomKey);
+        this.setState({activeMessage: roomKey})
+        this.setState({displayMessageContent: roomName})// Note curly inside regular parans
+        console.log(this.state.activeMessage)
     }
 
     render() {
         let messages = this.state.messages.map((val, index) => {
             if (this.props.activeRoom === val.roomId) {
-                return <li key={index}>{val.content+ ": " + this.createTimeFormat(val.sentAt)}</li>
+                return <li   onClick={()=>this.setMessage(val.key,val.content)} key={index}>{val.content+ ": " + this.createTimeFormat(val.sentAt)}</li>
+
+
             }
         });
         return (
             <section className="addingMessage">
                 <h3>Room Selected: {this.props.displayRoomName ? this.props.displayRoomName : "None - Messages go to Default"}</h3>
                 <h3>Room Messages</h3>
+
                 <ul>
                     {messages}
                 </ul>
-
+                <button onClick={this.deleteMessage}>Delete Message</button>
                 <form onSubmit={this.createMessage} ><label>Message:
                 <input type="text" value={this.state.value} onChange={this.handleChange} />
                 </label>
                 <input type="submit" value="Submit" />
                 </form>
+
+<h3>Message Selected: {this.state.displayMessageContent ? this.state.displayMessageContent : "None Selected"}</h3>
+
             </section>
+
+
+
         )
     }
 }
@@ -85,3 +110,5 @@ class MessageList extends Component {
 // **********Comments Section****************
 // MessageList.js Lists the messages associated with a chosen room
 //     componentDidMount() loads a copy of the firebase messages
+
+//<button onClick={this.deleteMessage()}>Delete Message?</button>
