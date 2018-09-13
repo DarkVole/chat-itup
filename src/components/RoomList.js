@@ -38,14 +38,11 @@ class RoomList extends Component {
         window.location.reload()
     }
 
-  
       renameRoom(event) {
           //alert (this.props.displayRoomName);
           this.roomsRef.child(this.props.activeRoom).update({roomName: this.state.value});
           window.location.reload()
         }
-
-
 
     componentDidMount() {
             this.roomsRef.on('child_added', snapshot => {
@@ -56,11 +53,10 @@ class RoomList extends Component {
         });
       }
 
-
     render() {
         return (
             <section className="roomlist"> {/*Renders form for new room*/}
-              <form onSubmit={this.createRoom} ><label>Name:
+              <form onSubmit={this.createRoom} ><label>New Room Name:
               <input type="text" value={this.state.value} onChange={this.handleChange} />
               </label>
               <input type="submit" value="Submit" />
@@ -73,10 +69,10 @@ class RoomList extends Component {
             </ul>
             <button onClick={this.deleteRoom}>Delete Room</button>
 
-            <form onSubmit={this.renameRoom} ><label>New Name:
+            <form onSubmit={this.renameRoom} ><label>Changed Room Name:
             <input type="text" value2={"Test Room"} onChange={this.handleChange} />
             </label>
-            <input type="submit" value="Change" />
+            <input type="submit" value="Submit New Room Name" />
             </form>
             </section>
         );

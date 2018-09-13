@@ -9,7 +9,7 @@ class MessageList extends Component {
             value: '',
             messages: [],
             activeMessage: '',
-            //displayMessageContent: '',
+
 
         }
         this.messagesRef = this.props.firebase.database().ref('messages');
@@ -30,7 +30,7 @@ class MessageList extends Component {
     }
 
     renameMessage(event) {
-        alert (this.state.activeMessage);
+        //alert (this.state.activeMessage);
         console.log(this.state.activeMessage)
         this.messagesRef.child(this.state.activeMessage).update({content: this.state.value});
         window.location.reload()
@@ -53,11 +53,10 @@ class MessageList extends Component {
                    date.getSeconds(),
 
                 ]; //=> [2011, 3, 25, 23, 0, 0]
-    var formatDate =  datevalues[2]+"/"+datevalues[1]+"/"+datevalues[0]+ " "+datevalues[3]+":"+datevalues[4];
+    var formatDate =  datevalues[3]+":"+datevalues[4]+" "+datevalues[1]+ "/"+datevalues[2]+"/"+datevalues[0];
     return formatDate}
 
     createMessage(event) {
-
         this.messagesRef.push({content: this.state.value,
           sentAt: this.props.firebase.database.ServerValue.TIMESTAMP,
         roomId: this.props.activeRoom ? this.props.activeRoom : "-A1000" ,
@@ -86,7 +85,6 @@ class MessageList extends Component {
             if (this.props.activeRoom === val.roomId) {
                 return <li   onClick={()=>this.setMessage(val.key,val.content)} key={index}>{val.content+ ": " + this.createTimeFormat(val.sentAt)}</li>
 
-
             }
         });
         return (
@@ -97,23 +95,24 @@ class MessageList extends Component {
                 <ul>
                     {messages}
                 </ul>
-                <button onClick={this.deleteMessage}>Delete Message</button>
+
+                <button onClick={this.deleteMessage}>Delete Selected Message</button>
+
                 <form onSubmit={this.renameMessage} ><label>Update Message:
                 <input type="text" value2={"Test Message"} onChange={this.handleChange} />
                 </label>
                 <input type="submit" value="Change" />
                 </form>
+
                 <form onSubmit={this.createMessage} ><label>Message:
                 <input type="text" value={this.state.value} onChange={this.handleChange} />
                 </label>
                 <input type="submit" value="Submit" />
                 </form>
 
-<h3>Message Selected: {this.state.displayMessageContent ? this.state.displayMessageContent : "None Selected"}</h3>
+                <h3>Message Selected: {this.state.displayMessageContent ? this.state.displayMessageContent : "None Selected"}</h3>
 
             </section>
-
-
 
         )
     }
