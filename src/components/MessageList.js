@@ -16,6 +16,7 @@ class MessageList extends Component {
         this.handleChange = this.handleChange.bind(this);
         this.createMessage = this.createMessage.bind(this);
         this.deleteMessage = this.deleteMessage.bind(this);
+        this.renameMessage = this.renameMessage.bind(this);
     }
     // **********Functions **********************
     componentDidMount() {
@@ -27,6 +28,13 @@ class MessageList extends Component {
                   this.setState({ value: '' });
               });
     }
+
+    renameMessage(event) {
+        alert (this.state.activeMessage);
+        console.log(this.state.activeMessage)
+        this.messagesRef.child(this.state.activeMessage).update({content: this.state.value});
+        window.location.reload()
+      }
 
     handleChange(event) {
         this.setState({value: event.target.value});
@@ -90,6 +98,11 @@ class MessageList extends Component {
                     {messages}
                 </ul>
                 <button onClick={this.deleteMessage}>Delete Message</button>
+                <form onSubmit={this.renameMessage} ><label>Update Message:
+                <input type="text" value2={"Test Message"} onChange={this.handleChange} />
+                </label>
+                <input type="submit" value="Change" />
+                </form>
                 <form onSubmit={this.createMessage} ><label>Message:
                 <input type="text" value={this.state.value} onChange={this.handleChange} />
                 </label>
