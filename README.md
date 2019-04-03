@@ -24,3 +24,8 @@ The User Interface Wireframe has been created and documented:
 https://www.lucidchart.com/documents/edit/345dc276-8d58-440b-b971-bf9c8cd8aa39/0
 
 The documentation includes the current version without any UI (backend end view) and the UI which will be implment with BootStrap
+
+
+### Project Management & Agile Cards
+
+These are kept in Trello at: https://trello.com/b/FRfnWTux/chat-it-up
