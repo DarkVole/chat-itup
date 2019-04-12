@@ -71,27 +71,22 @@ class RoomList extends Component {
 
 
     render() {
-        return ( <
-            ul >
-            {
-                this.state.rooms.map((val) =>
-                    <
-                    ListItem key = {
-                        val
+        return (
+            this.state.rooms.map((val, index) => this.state.messages.map((val, index) => {
+                return ( < li onClick = {
+                        () => this.setRoom(val.key, val.roomName)
                     }
-                    value = {
+                    key = {
+                        index
+                    } > {
                         val.roomName
-                    }
-                    />
+                    } < /li>
+
+
                 )
-            }
-            <
-            /ul>
+            })))
 
-        )
     }
-
-
-
 }
-export default RoomList;
+
+    export default RoomList;
