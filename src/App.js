@@ -72,28 +72,29 @@ class App extends Component {
 
     render() {
         return ( <
-            div className = "app" > { /*Will List Headers and Rooms*/ } <
+            div className = "app" > {
+                /*Will List Headers and Rooms*/
+            } <
             img src = "https://i.imgur.com/Wg9WVCi.jpg"
             alt = "chat logo"
             width = "100" >
             <
             /img> <
-            h1 className = "chat-header" > Bloc Chat < /h1> <
-            h3 > Chat Rooms: < /h3> <
+            h1 class = "display-4 bg-warning test-dark p-2" > Chat It Up! < /h1> <
+            h3 class = "display-5" > Chat Rooms: < /h3> <
             RoomList firebase = {
                 firebase
+            }
+
+            displayRoomName = {
+                this.state.displayRoomName
             }
             setRoom = {
                 this.setRoom
             }
-            displayRoomName = {
-                this.state.displayRoomName
-            }
             activeRoom = {
                 this.state.activeRoom
             }
-            /> <
-            p > < /p> <
             MessageList firebase = {
                 firebase
             }
@@ -112,27 +113,25 @@ class App extends Component {
             displayMessageContent = {
                 this.state.displayMessageContent
             }
-            />  {/ * Note firebase = {
-                firebase
-            }
-            is required * /} <
-            User firebase = {
-                firebase
-            }
-            setUser = {
-                this.setUser
-            }
-            user = {
-                this.state.activeUser
-            }
             />
+        }
+        is required * /} <
+        User firebase = {
+            firebase
+        }
+        setUser = {
+            this.setUser
+        }
+        user = {
+            this.state.activeUser
+        }
+        />
 
-            <
-            /div>
-        );
-    }
+        <
+        /div>
+    );
+}
 
 }
 
 export default App;
-
