@@ -2,6 +2,10 @@ import React, {
     Component
 } from 'react';
 import * as firebase from 'firebase';
+import {
+    Button
+} from 'reactstrap';
+import { ListGroup, ListGroupItem } from 'reactstrap';
 
 class User extends Component {
 
@@ -39,17 +43,22 @@ class User extends Component {
 
             <
             section className = "userlogs" >
+            <div>
+             <Button m-x5 color="primary">Sign In</Button>{this.googleSignIn}
             <
             button onClick = {
                 this.googleSignIn
             } > Sign In < /button> <
             p > Current User: {
                 this.props.user ? this.props.user.displayName : 'Guest'
-            } < /p> <
+            } < /p> 
+            
+            <Button color="danger"> Sign Out </Button>{this.googleSignout}
+            <
             button onClick = {
                 this.googleSignout
             } > Sign Out < /button>
-
+</div>
             <
             /section>
 

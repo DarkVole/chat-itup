@@ -75,7 +75,7 @@ class App extends Component {
             div className = "app" > {
                 /*Will List Headers and Rooms*/
             } <
-            img src = "https://i.imgur.com/Wg9WVCi.jpg"
+            img src = "https://thumbs2.imgbox.com/94/b7/QNWZcD2x_t.png"
             alt = "chat logo"
             width = "100" >
             <

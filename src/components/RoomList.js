@@ -4,6 +4,7 @@ import React, {
 import {
     Button
 } from 'reactstrap';
+import { ListGroup, ListGroupItem } from 'reactstrap';
 
 class RoomList extends Component {
 
@@ -72,10 +73,9 @@ class RoomList extends Component {
 
     render() {
         return (
-            this.state.rooms.map((val, index) => this.state.messages.map((val, index) => {
-                return ( < li onClick = {
-                        () => this.setRoom(val.key, val.roomName)
-                    }
+            
+            this.state.rooms.map((val, index) => this.state.rooms.map((val, index) => {
+                return ( < li 
                     key = {
                         index
                     } > {
@@ -89,4 +89,4 @@ class RoomList extends Component {
     }
 }
 
-    export default RoomList;
+export default RoomList;
