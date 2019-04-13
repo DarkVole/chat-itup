@@ -7,6 +7,7 @@ import RoomList from './components/RoomList.js';
 import MessageList from './components/MessageList.js';
 import User from './components/User.js';
 import * as firebase from 'firebase';
+import { Jumbotron, Container } from 'reactstrap';
 
 // Initialize Firebase
 var config = {
@@ -77,11 +78,11 @@ class App extends Component {
             } <
             img src = "https://thumbs2.imgbox.com/94/b7/QNWZcD2x_t.png"
             alt = "chat logo"
-            width = "100" >
+            width = "200" >
             <
-            /img> <
-            h1 class = "display-4 bg-warning test-dark p-2" > Chat It Up! < /h1> <
-            h3 class = "display-5" > Chat Rooms: < /h3> <
+                
+            /img>  <
+            h3 class = "display-5 p-3 text-primary" > Chat Rooms: < /h3> <
             RoomList firebase = {
                 firebase
             }
@@ -114,8 +115,7 @@ class App extends Component {
                 this.state.displayMessageContent
             }
             />
-        }
-        is required * /} <
+         <
         User firebase = {
             firebase
         }

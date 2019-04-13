@@ -4,7 +4,11 @@ import React, {
 import {
     Button
 } from 'reactstrap';
-import { ListGroup, ListGroupItem } from 'reactstrap';
+
+import {
+    ListGroup,
+    ListGroupItem
+} from 'reactstrap';
 
 class RoomList extends Component {
 
@@ -73,19 +77,21 @@ class RoomList extends Component {
 
     render() {
         return (
-            
-            this.state.rooms.map((val, index) => this.state.rooms.map((val, index) => {
-                return ( < li 
+
+            this.state.rooms.map((val, index) => {
+                return ( < ListGroupItem className = "px-4"
                     key = {
                         index
                     } > {
                         val.roomName
-                    } < /li>
+                    } < /ListGroupItem>
+
 
 
                 )
-            })))
-
+            })
+            
+        )
     }
 }
 

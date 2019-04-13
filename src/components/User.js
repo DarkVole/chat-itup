@@ -43,21 +43,19 @@ class User extends Component {
 
             <
             section className = "userlogs" >
-            <div>
-             <Button m-x5 color="primary">Sign In</Button>{this.googleSignIn}
-            <
-            button onClick = {
+            <div class = "p-3">
+             <Button onClick = {
                 this.googleSignIn
-            } > Sign In < /button> <
-            p > Current User: {
+            } px-md-5 color="primary">Sign In</Button>{this.googleSignIn}
+             <
+            p className = "text-info pt-3 px-3"> Current User: {
                 this.props.user ? this.props.user.displayName : 'Guest'
             } < /p> 
             
-            <Button color="danger"> Sign Out </Button>{this.googleSignout}
-            <
-            button onClick = {
+            <Button onClick = {
                 this.googleSignout
-            } > Sign Out < /button>
+            }color="warning"> Sign Out </Button>{this.googleSignout}
+            
 </div>
             <
             /section>
