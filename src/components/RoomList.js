@@ -79,12 +79,12 @@ class RoomList extends Component {
         return (
 
             this.state.rooms.map((val, index) => {
-                return ( < ListGroupItem className = "px-4" color="link" 
+                return ( < ListGroupItem className = "px-4" tag="a" href="#" onClick={()=>this.props.setRoom(val.key,val.roomName)}
                     key = {
                         index
                     } > {
                         val.roomName
-                    } < /ListGroupItem>{onClick={()=>this.props.setRoom(val.key,val.roomName)}}
+                    } < /ListGroupItem>
 
 
 
