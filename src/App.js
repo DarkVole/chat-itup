@@ -86,7 +86,6 @@ class App extends Component {
             RoomList firebase = {
                 firebase
             }
-
             displayRoomName = {
                 this.state.displayRoomName
             }
