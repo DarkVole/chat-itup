@@ -163,7 +163,6 @@ class MessageList extends Component {
 
             <
             Form >
-
             <
             FormGroup className = "mt-5 px-3"
             onSubmit = {
@@ -186,6 +185,9 @@ class MessageList extends Component {
             color = "warning" > Change < /Button>
 
             <
+            /Form> <
+            Form >
+            <
             FormGroup className = "mt-5 px-3"
             onSubmit = {
                 this.createMessage
@@ -202,12 +204,12 @@ class MessageList extends Component {
             value = {
                 this.state.value
             }
-            /> <
-            /FormGroup>
+            /> < /
+            FormGroup >
             <
             Button className = "ml-3 mb-3"
-            color = "primary" > Create < /Button> <
-            /Form>
+            color = "primary" > Create < /Button> < /
+            Form >
 
             <
             /section>          
