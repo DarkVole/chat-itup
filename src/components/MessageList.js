@@ -1,7 +1,28 @@
 import React, {
     Component
 } from 'react';
+import {
+    Button
+} from 'reactstrap';
 
+import {
+    ListGroup,
+    ListGroupItem
+} from 'reactstrap';
+
+import {
+    Alert
+} from 'reactstrap'
+import {
+    Badge
+} from 'reactstrap';
+import {
+    Form,
+    FormGroup,
+    Label,
+    Input,
+    FormText
+} from 'reactstrap';
 
 class MessageList extends Component {
     constructor(props) {
@@ -77,11 +98,12 @@ class MessageList extends Component {
     }
 
     deleteMessage(event) {
+
         this.messagesRef.child(this.state.activeMessage).remove();
         window.location.reload()
     }
 
-    setMessage = (roomKey, roomName) => { 
+    setMessage = (roomKey, roomName) => {
         console.log(roomKey);
         this.setState({
             activeMessage: roomKey
@@ -95,24 +117,28 @@ class MessageList extends Component {
     render() {
         let messages = this.state.messages.map((val, index) => {
             if (this.props.activeRoom === val.roomId) {
-                return <li onClick = {
+                return <ListGroupItem className = "px-4"
+                color = "info"
+                tag = "a"
+                href = "#"
+                onClick = {
                     () => this.setMessage(val.key, val.content)
                 }
                 key = {
-                    index
-                } > {
-                    val.content + ": " + this.createTimeFormat(val.sentAt)
-                } < /li>
-
+                        index
+                    } > {
+                        val.content + ": " + this.createTimeFormat(val.sentAt)
+                    } <
+                    /ListGroupItem>
             }
         });
         return ( <
             section className = "addingMessage" >
+
             <
-            h3 > Room Selected: {
+            h3 className = "text-info pt-3 px-3" > Room Selected: < Badge color = "secondary" > {
                 this.props.displayRoomName ? this.props.displayRoomName : "None - Messages go to Default"
-            } < /h3> <
-            h3 > Room Messages < /h3>
+            } < /Badge> < /h3 >
 
             <
             ul > {
@@ -121,59 +147,75 @@ class MessageList extends Component {
             /ul>
 
             <
-            button onClick = {
-                this.deleteMessage
-            } > Delete Selected Message < /button>
+            h4 className = "text-info pt-3 px-3" > Message Selected: < Badge className = "text-left"
+            color = "secondary" > {
+                this.state.displayMessageContent ? this.state.displayMessageContent : "None Selected"
+            } < /Badge> < /h4 >
 
             <
-            form onSubmit = {
-                this.renameMessage
-            } > < label > Update Message:
+            Button className = "ml-3 mb-3"
+            onClick = {
+                this.deleteMessage
+            }
+            color = "danger" > Delete Selected Message ? < /Button>{this.deleteMessage}
+
+
+
             <
-            input type = "text"
-            value2 = {
-                "Test Message"
+            Form >
+
+            <
+            FormGroup className = "mt-5 px-3"
+            onSubmit = {
+                this.renameMessage
             }
             onChange = {
                 this.handleChange
-            }
-            /> <
-            /label> <
-            input type = "submit"
-            value = "Change" / >
+            } >
             <
-            /form>
+            Label
+            for = "exampleText" > Update Message < /Label> <
+            Input type = "textarea"
+            name = "text"
+            id = "exampleText" / >
+            <
+            /FormGroup>
 
             <
-            form onSubmit = {
-                this.createMessage
-            } > < label > Message:
+            Button className = "ml-3 mb-3"
+            color = "warning" > Change < /Button>
+
             <
-            input type = "text"
+            FormGroup className = "mt-5 px-3"
+            onSubmit = {
+                this.createMessage
+            }
+            onChange = {
+                this.handleChange
+            } >
+            <
+            Label
+            for = "exampleText" > New Message < /Label> <
+            Input type = "textarea"
+            name = "text"
+            id = "exampleText"
             value = {
                 this.state.value
             }
-            onChange = {
-                this.handleChange
-            }
             /> <
-            /label> <
-            input type = "submit"
-            value = "Submit" / >
+            /FormGroup>
             <
-            /form>
+            Button className = "ml-3 mb-3"
+            color = "primary" > Create < /Button> <
+            /Form>
 
             <
-            h3 > Message Selected: {
-                this.state.displayMessageContent ? this.state.displayMessageContent : "None Selected"
-            } < /h3>
+            /section>          
 
-            <
-            /section>
 
-        )
+        );
     }
 }
 
-export default MessageList;
 
+export default MessageList;

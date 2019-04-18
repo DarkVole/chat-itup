@@ -7,7 +7,11 @@ import RoomList from './components/RoomList.js';
 import MessageList from './components/MessageList.js';
 import User from './components/User.js';
 import * as firebase from 'firebase';
-import { Jumbotron, Container } from 'reactstrap';
+import {
+    Jumbotron,
+    Container
+} from 'reactstrap';
+import TopNav from './components/TopNav';
 
 // Initialize Firebase
 var config = {
@@ -72,64 +76,33 @@ class App extends Component {
     }
 
     render() {
-        return ( <
-            div className = "app" > {
-                /*Will List Headers and Rooms*/
-            } <
-            img src = "https://thumbs2.imgbox.com/94/b7/QNWZcD2x_t.png"
+        return ( 
+            <div className = "app" >
+            <TopNav />
+            < img src = "https://thumbs2.imgbox.com/94/b7/QNWZcD2x_t.png"
             alt = "chat logo"
             width = "200" >
-            <
-                
-            /img>  <
-            h3 class = "display-5 p-3 text-primary" > Chat Rooms: < /h3> <
-            RoomList firebase = {
-                firebase
-            }
-            displayRoomName = {
-                this.state.displayRoomName
-            }
-            setRoom = {
-                this.setRoom
-            }
-            activeRoom = {
-                this.state.activeRoom
-            }
-            MessageList firebase = {
-                firebase
-            }
-            activeRoom = {
-                this.state.activeRoom
-            }
-            displayRoomName = {
-                this.state.displayRoomName
-            }
-            user = {
-                this.state.activeUser
-            }
-            setMessage = {
-                this.setMessage
-            }
-            displayMessageContent = {
-                this.state.displayMessageContent
-            }
+            </img>
+            <h3 className = "display-5 p-3 " > Chat Rooms: < /h3>  
+            
+            <RoomList firebase = {firebase}
+            setRoom = {this.setRoom}
+            displayRoomName = {this.state.displayRoomName}
+            activeRoom = {this.state.activeRoom}
             />
-         <
-        User firebase = {
-            firebase
-        }
-        setUser = {
-            this.setUser
-        }
-        user = {
-            this.state.activeUser
-        }
-        />
-
-        <
-        /div>
-    );
-}
+            
+            <MessageList firebase = {firebase}
+            activeRoom = {this.state.activeRoom}
+            displayRoomName = {this.state.displayRoomName}
+            user = {this.state.activeUser}
+            setMessage = {this.setMessage}
+            displayMessageContent = {this.state.displayMessageContent}
+            />
+            
+            </div>
+            
+        );
+    }
 
 }
 
